@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bram.vaneijk
- * Date: 25-10-2016
- * Time: 13:44
- */
 
-namespace CleverIt\UBL\Invoice;
-
+namespace CrixuAMG\UBL\Invoice;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-class Contact implements XmlSerializable {
+class Contact implements XmlSerializable
+{
     private $telephone;
     private $telefax;
     private $electronicMail;
@@ -20,48 +14,60 @@ class Contact implements XmlSerializable {
     /**
      * @return mixed
      */
-    public function getTelephone() {
+    public function getTelephone()
+    {
         return $this->telephone;
     }
 
     /**
      * @param mixed $telephone
+     *
      * @return Contact
      */
-    public function setTelephone($telephone) {
+    public function setTelephone($telephone)
+    {
         $this->telephone = $telephone;
+
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getTelefax() {
+    public function getTelefax()
+    {
         return $this->telefax;
     }
 
     /**
      * @param mixed $telefax
+     *
      * @return Contact
      */
-    public function setTelefax($telefax) {
+    public function setTelefax($telefax)
+    {
         $this->telefax = $telefax;
+
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getElectronicMail() {
+    public function getElectronicMail()
+    {
         return $this->electronicMail;
     }
 
     /**
      * @param mixed $electronicMail
+     *
      * @return Contact
      */
-    public function setElectronicMail($electronicMail) {
+    public function setElectronicMail($electronicMail)
+    {
         $this->electronicMail = $electronicMail;
+
         return $this;
     }
 
@@ -69,25 +75,27 @@ class Contact implements XmlSerializable {
      * The xmlSerialize method is called during xml writing.
      *
      * @param Writer $writer
+     *
      * @return void
      */
-    function xmlSerialize(Writer $writer) {
+    function xmlSerialize(Writer $writer)
+    {
         // TODO: Implement xmlSerialize() method.
-        if($this->telephone !== null) {
+        if ($this->telephone !== null) {
             $writer->write([
-                Schema::CBC . 'Telephone' => $this->telephone
+                Schema::CBC . 'Telephone' => $this->telephone,
             ]);
         }
 
-        if($this->telefax !== null) {
+        if ($this->telefax !== null) {
             $writer->write([
-                Schema::CBC . 'Telefax' => $this->telefax
+                Schema::CBC . 'Telefax' => $this->telefax,
             ]);
         }
 
-        if($this->electronicMail !== null) {
+        if ($this->electronicMail !== null) {
             $writer->write([
-                Schema::CBC . 'ElectronicMail' => $this->electronicMail
+                Schema::CBC . 'ElectronicMail' => $this->electronicMail,
             ]);
         }
     }

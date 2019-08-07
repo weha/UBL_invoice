@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
-         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+<Invoice xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+         xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
     <cbc:CustomizationID>OIOUBL-2.01</cbc:CustomizationID>
     <cbc:ID>CIT1234</cbc:ID>
@@ -11,7 +11,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyName>
-                <cbc:Name>CleverIt</cbc:Name>
+                <cbc:Name>CrixuAMG</cbc:Name>
             </cac:PartyName>
             <cac:PostalAddress>
                 <cbc:StreetName>Keizersgracht</cbc:StreetName>
@@ -42,7 +42,7 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <cac:PartyName>
-                <cbc:Name>CleverIt</cbc:Name>
+                <cbc:Name>CrixuAMG</cbc:Name>
             </cac:PartyName>
             <cac:PostalAddress>
                 <cbc:StreetName>Keizersgracht</cbc:StreetName>

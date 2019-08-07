@@ -4,22 +4,21 @@
  * http://www.oioubl.net/validator/
  */
 
+use CrixuAMG\UBL\Invoice\Invoice;
+use CrixuAMG\UBL\Invoice\Generator;
+use CrixuAMG\UBL\Invoice\LegalMonetaryTotal;
+use CrixuAMG\UBL\Invoice\TaxSubTotal;
+use CrixuAMG\UBL\Invoice\Address;
+use CrixuAMG\UBL\Invoice\Country;
+use CrixuAMG\UBL\Invoice\Party;
+use CrixuAMG\UBL\Invoice\Item;
+use CrixuAMG\UBL\Invoice\Price;
+use CrixuAMG\UBL\Invoice\InvoiceLine;
+use CrixuAMG\UBL\Invoice\TaxScheme;
+use CrixuAMG\UBL\Invoice\TaxTotal;
+use CrixuAMG\UBL\Invoice\TaxCategory;
 
-use CleverIt\UBL\Invoice\Invoice;
-use CleverIt\UBL\Invoice\Generator;
-use CleverIt\UBL\Invoice\LegalMonetaryTotal;
-use CleverIt\UBL\Invoice\TaxSubTotal;
-use CleverIt\UBL\Invoice\Address;
-use CleverIt\UBL\Invoice\Country;
-use CleverIt\UBL\Invoice\Party;
-use CleverIt\UBL\Invoice\Item;
-use CleverIt\UBL\Invoice\Price;
-use CleverIt\UBL\Invoice\InvoiceLine;
-use CleverIt\UBL\Invoice\TaxScheme;
-use CleverIt\UBL\Invoice\TaxTotal;
-use CleverIt\UBL\Invoice\TaxCategory;
-
-require_once  __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $generator          = new Generator();
 $legalMonetaryTotal = new LegalMonetaryTotal();
@@ -35,7 +34,7 @@ $country->setIdentificationCode('FR');
 $caddress->setCountry($country);
 
 // company
-$company  = new Party();
+$company = new Party();
 $company->setName('Company Machin');
 //$company->setPhysicalLocation($caddress);
 $company->setPostalAddress($caddress);
@@ -46,12 +45,12 @@ $client->setName('My client');
 $client->setPostalAddress($caddress);
 
 //product
-$item   = new Item();
+$item = new Item();
 $item->setName('Product Name');
 $item->setDescription('Product Description');
 
 //price
-$price= new Price();
+$price = new Price();
 $price->setBaseQuantity(1);
 $price->setUnitCode('Unit');
 $price->setPriceAmount(10);
@@ -65,7 +64,7 @@ $invoiceLine->setInvoicedQuantity(1);
 
 $invoiceLines = array($invoiceLine);
 // taxe TVA
-$TaxScheme    = new TaxScheme();
+$TaxScheme = new TaxScheme();
 $TaxScheme->setId(0);
 $taxCategory = new TaxCategory();
 $taxCategory->setId(0);
@@ -82,7 +81,6 @@ $taxSubTotal->setTaxCategory($taxCategory);
 $taxTotal->addTaxSubTotal($taxSubTotal);
 $taxTotal->setTaxAmount($taxSubTotal->getTaxAmount());
 
-
 // invoice
 $invoice = new Invoice();
 $invoice->setId(3);
@@ -91,7 +89,7 @@ $invoice->setInvoiceTypeCode('invoiceTypeCode');
 $invoice->setAccountingSupplierParty($company);
 $invoice->setAccountingCustomerParty($client);
 $invoice->setInvoiceLines($invoiceLines);
-$legalMonetaryTotal->setPayableAmount(10+2);
+$legalMonetaryTotal->setPayableAmount(10 + 2);
 $legalMonetaryTotal->setAllowanceTotalAmount(0);
 $invoice->setLegalMonetaryTotal($legalMonetaryTotal);
 $invoice->setTaxTotal($taxTotal);
