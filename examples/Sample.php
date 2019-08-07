@@ -4,19 +4,19 @@
  * http://www.oioubl.net/validator/
  */
 
-use CleverIt\UBL\Invoice\Invoice;
-use CleverIt\UBL\Invoice\Generator;
-use CleverIt\UBL\Invoice\LegalMonetaryTotal;
-use CleverIt\UBL\Invoice\TaxSubTotal;
-use CleverIt\UBL\Invoice\Address;
-use CleverIt\UBL\Invoice\Country;
-use CleverIt\UBL\Invoice\Party;
-use CleverIt\UBL\Invoice\Item;
-use CleverIt\UBL\Invoice\Price;
-use CleverIt\UBL\Invoice\InvoiceLine;
-use CleverIt\UBL\Invoice\TaxScheme;
-use CleverIt\UBL\Invoice\TaxTotal;
-use CleverIt\UBL\Invoice\TaxCategory;
+use CrixuAMG\UBL\Invoice\Invoice;
+use CrixuAMG\UBL\Invoice\Generator;
+use CrixuAMG\UBL\Invoice\LegalMonetaryTotal;
+use CrixuAMG\UBL\Invoice\TaxSubTotal;
+use CrixuAMG\UBL\Invoice\Address;
+use CrixuAMG\UBL\Invoice\Country;
+use CrixuAMG\UBL\Invoice\Party;
+use CrixuAMG\UBL\Invoice\Item;
+use CrixuAMG\UBL\Invoice\Price;
+use CrixuAMG\UBL\Invoice\InvoiceLine;
+use CrixuAMG\UBL\Invoice\TaxScheme;
+use CrixuAMG\UBL\Invoice\TaxTotal;
+use CrixuAMG\UBL\Invoice\TaxCategory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

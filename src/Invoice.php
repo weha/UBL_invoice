@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bram.vaneijk
- * Date: 13-10-2016
- * Time: 16:29
- */
 
-namespace CleverIt\UBL\Invoice;
+namespace CrixuAMG\UBL\Invoice;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
@@ -14,7 +8,7 @@ use Sabre\Xml\XmlSerializable;
 /**
  * Class Invoice
  *
- * @package CleverIt\UBL\Invoice
+ * @package CrixuAMG\UBL\Invoice
  */
 class Invoice implements XmlSerializable
 {

@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bram.vaneijk
- * Date: 27-10-2016
- * Time: 10:43
- */
 
-namespace CleverIt\UBL\Invoice;
+namespace CrixuAMG\UBL\Invoice;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;

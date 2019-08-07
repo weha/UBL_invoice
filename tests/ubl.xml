@@ -11,7 +11,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyName>
-                <cbc:Name>CleverIt</cbc:Name>
+                <cbc:Name>CrixuAMG</cbc:Name>
             </cac:PartyName>
             <cac:PostalAddress>
                 <cbc:StreetName>Keizersgracht</cbc:StreetName>
@@ -42,7 +42,7 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <cac:PartyName>
-                <cbc:Name>CleverIt</cbc:Name>
+                <cbc:Name>CrixuAMG</cbc:Name>
             </cac:PartyName>
             <cac:PostalAddress>
                 <cbc:StreetName>Keizersgracht</cbc:StreetName>
