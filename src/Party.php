@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bram.vaneijk
- * Date: 13-10-2016
- * Time: 17:19
- */
 
-namespace CleverIt\UBL\Invoice;
-
+namespace CrixuAMG\UBL\Invoice;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-class Party implements XmlSerializable{
+class Party implements XmlSerializable
+{
     private $name;
     /**
      * @var Address
@@ -27,158 +21,183 @@ class Party implements XmlSerializable{
      */
     private $contact;
 
-	/**
-	 * @var string
-	 */
+    /**
+     * @var string
+     */
     private $companyId;
 
-	/**
-	 * @var TaxScheme
-	 */
+    /**
+     * @var TaxScheme
+     */
     private $taxScheme;
 
-	/**
-	 * @var LegalEntity
-	 */
+    /**
+     * @var LegalEntity
+     */
     private $legalEntity;
 
     /**
      * @return mixed
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @param mixed $name
+     *
      * @return Party
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
+
         return $this;
     }
 
     /**
      * @return Address
      */
-    public function getPostalAddress() {
+    public function getPostalAddress()
+    {
         return $this->postalAddress;
     }
 
     /**
      * @param Address $postalAddress
+     *
      * @return Party
      */
-    public function setPostalAddress($postalAddress) {
+    public function setPostalAddress($postalAddress)
+    {
         $this->postalAddress = $postalAddress;
+
         return $this;
     }
 
-	/**
-	 * @return string
-	 */
-    public function getCompanyId() {
-    	return $this->companyId;
+    /**
+     * @return string
+     */
+    public function getCompanyId()
+    {
+        return $this->companyId;
     }
 
-	/**
-	 * @param string $companyId
-	 */
-	public function setCompanyId($companyId) {
-    	$this->companyId = $companyId;
-	}
-
-	/**
-	 * @param TaxScheme $taxScheme.
-	 * @return mixed
-	 */
-    public function getTaxScheme() {
-    	return $this->taxScheme;
+    /**
+     * @param string $companyId
+     */
+    public function setCompanyId($companyId)
+    {
+        $this->companyId = $companyId;
     }
 
-	/**
-	 * @param TaxScheme $taxScheme
-	 */
-    public function setTaxScheme($taxScheme) {
-    	$this->taxScheme = $taxScheme;
+    /**
+     * @param TaxScheme $taxScheme .
+     *
+     * @return mixed
+     */
+    public function getTaxScheme()
+    {
+        return $this->taxScheme;
     }
 
-	/**
-	 * @return LegalEntity
-	 */
-    public function getLegalEntity() {
-    	return $this->legalEntity;
+    /**
+     * @param TaxScheme $taxScheme
+     */
+    public function setTaxScheme($taxScheme)
+    {
+        $this->taxScheme = $taxScheme;
     }
 
-	/**
-	 * @param $legalEntity
-	 * @return Party
-	 */
-    public function setLegalEntity($legalEntity) {
-    	$this->legalEntity = $legalEntity;
-    	return $this;
+    /**
+     * @return LegalEntity
+     */
+    public function getLegalEntity()
+    {
+        return $this->legalEntity;
+    }
+
+    /**
+     * @param $legalEntity
+     *
+     * @return Party
+     */
+    public function setLegalEntity($legalEntity)
+    {
+        $this->legalEntity = $legalEntity;
+
+        return $this;
     }
 
     /**
      * @return Address
      */
-    public function getPhysicalLocation() {
+    public function getPhysicalLocation()
+    {
         return $this->physicalLocation;
     }
 
     /**
      * @param Address $physicalLocation
+     *
      * @return Party
      */
-    public function setPhysicalLocation($physicalLocation) {
+    public function setPhysicalLocation($physicalLocation)
+    {
         $this->physicalLocation = $physicalLocation;
+
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getContact() {
+    public function getContact()
+    {
         return $this->contact;
     }
 
     /**
      * @param mixed $contact
+     *
      * @return Party
      */
-    public function setContact($contact) {
+    public function setContact($contact)
+    {
         $this->contact = $contact;
+
         return $this;
     }
 
-    function xmlSerialize(Writer $writer) {
+    function xmlSerialize(Writer $writer)
+    {
         $writer->write([
-            Schema::CAC.'PartyName' => [
-                Schema::CBC.'Name' => $this->name
+            Schema::CAC . 'PartyName'     => [
+                Schema::CBC . 'Name' => $this->name,
             ],
-            Schema::CAC.'PostalAddress' => $this->postalAddress
+            Schema::CAC . 'PostalAddress' => $this->postalAddress,
         ]);
 
-	    if($this->taxScheme){
-		    $writer->write([
-			    Schema::CAC.'PartyTaxScheme' => [
-				    Schema::CBC.'CompanyID' => $this->companyId,
-                    Schema::CAC.'TaxScheme' => $this->taxScheme
-			    ],
-		    ]);
-	    }
-
-        if($this->physicalLocation){
+        if ($this->taxScheme) {
             $writer->write([
-               Schema::CAC.'PhysicalLocation' => [Schema::CAC.'Address' => $this->physicalLocation]
+                Schema::CAC . 'PartyTaxScheme' => [
+                    Schema::CBC . 'CompanyID' => $this->companyId,
+                    Schema::CAC . 'TaxScheme' => $this->taxScheme,
+                ],
             ]);
         }
 
-        if($this->contact){
+        if ($this->physicalLocation) {
             $writer->write([
-                Schema::CAC.'Contact' => $this->contact
+                Schema::CAC . 'PhysicalLocation' => [Schema::CAC . 'Address' => $this->physicalLocation],
             ]);
         }
 
+        if ($this->contact) {
+            $writer->write([
+                Schema::CAC . 'Contact' => $this->contact,
+            ]);
+        }
     }
 }
