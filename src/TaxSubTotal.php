@@ -8,11 +8,11 @@
 
 namespace CleverIt\UBL\Invoice;
 
-
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-class TaxSubTotal implements XmlSerializable {
+class TaxSubTotal implements XmlSerializable
+{
     private $taxableAmount;
     private $taxAmount;
 
@@ -24,53 +24,65 @@ class TaxSubTotal implements XmlSerializable {
     /**
      * @return mixed
      */
-    public function getTaxableAmount() {
+    public function getTaxableAmount()
+    {
         return $this->taxableAmount;
     }
 
     /**
      * @param mixed $taxableAmount
+     *
      * @return TaxSubTotal
      */
-    public function setTaxableAmount($taxableAmount) {
+    public function setTaxableAmount($taxableAmount)
+    {
         $this->taxableAmount = $taxableAmount;
+
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getTaxAmount() {
+    public function getTaxAmount()
+    {
         return $this->taxAmount;
     }
 
     /**
      * @param mixed $taxAmount
+     *
      * @return TaxSubTotal
      */
-    public function setTaxAmount($taxAmount) {
+    public function setTaxAmount($taxAmount)
+    {
         $this->taxAmount = $taxAmount;
+
         return $this;
     }
 
     /**
      * @return TaxCategory
      */
-    public function getTaxCategory() {
+    public function getTaxCategory()
+    {
         return $this->taxCategory;
     }
 
     /**
      * @param TaxCategory $taxCategory
+     *
      * @return TaxSubTotal
      */
-    public function setTaxCategory($taxCategory) {
+    public function setTaxCategory($taxCategory)
+    {
         $this->taxCategory = $taxCategory;
+
         return $this;
     }
 
-
-    public function validate() {
+    public function validate()
+    {
         if ($this->taxableAmount === null) {
             throw new \InvalidArgumentException('Missing taxsubtotal taxableAmount');
         }
@@ -86,30 +98,33 @@ class TaxSubTotal implements XmlSerializable {
 
     /**
      * The xmlSerialize method is called during xml writing.
+     *
      * @param Writer $writer
+     *
      * @return void
      */
-    function xmlSerialize(Writer $writer) {
+    function xmlSerialize(Writer $writer)
+    {
         $this->validate();
 
         $writer->write([
                 [
-                    'name' => Schema::CBC . 'TaxableAmount',
-                    'value' => number_format($this->taxableAmount, 2, '.', ''),
+                    'name'       => Schema::CBC . 'TaxableAmount',
+                    'value'      => number_format($this->taxableAmount, 2, '.', ''),
                     'attributes' => [
-                        'currencyID' => Generator::$currencyID
-                    ]
+                        'currencyID' => Generator::$currencyID,
+                    ],
 
                 ],
                 [
-                    'name' => Schema::CBC . 'TaxAmount',
-                    'value' => number_format($this->taxAmount, 2, '.', ''),
+                    'name'       => Schema::CBC . 'TaxAmount',
+                    'value'      => number_format($this->taxAmount, 2, '.', ''),
                     'attributes' => [
-                        'currencyID' => Generator::$currencyID
-                    ]
+                        'currencyID' => Generator::$currencyID,
+                    ],
 
                 ],
-                Schema::CAC.'TaxCategory' => $this->taxCategory
+                Schema::CAC . 'TaxCategory' => $this->taxCategory,
             ]
         );
     }

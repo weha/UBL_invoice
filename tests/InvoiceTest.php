@@ -9,17 +9,18 @@ class InvoiceTest extends TestCase
 {
     private $invoice;
 
-    public function setUp(){
+    public function setUp()
+    {
         $xmlService = new \Sabre\Xml\Service();
 
         $xmlService->namespaceMap = [
-            'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2' => '',
-            'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2' => 'cbc',
-            'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2' => 'cac'
+            'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2'                   => '',
+            'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'     => 'cbc',
+            'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2' => 'cac',
         ];
 
         $invoice = new \CleverIt\UBL\Invoice\Invoice();
-        $date = \DateTime::createFromFormat('d-m-Y', '12-12-1994');
+        $date    = \DateTime::createFromFormat('d-m-Y', '12-12-1994');
         $invoice->setId('CIT1234');
         $invoice->setIssueDate($date);
         $invoice->setInvoiceTypeCode("SalesInvoice");
@@ -76,7 +77,6 @@ class InvoiceTest extends TestCase
             ->setPayableAmount(-1000)
             ->setAllowanceTotalAmount(50));
 
-
         $this->invoice = \CleverIt\UBL\Invoice\Generator::invoice($invoice, 'EUR');
     }
 
@@ -86,7 +86,8 @@ class InvoiceTest extends TestCase
         $this->assertXmlStringEqualsXmlFile(__DIR__ . "/ubl.xml", $this->invoice);
     }
 
-    public function testValidateSchema(){
+    public function testValidateSchema()
+    {
         $validator = new UblValidator();
         $validator->isValid($this->invoice);
         $this->assertTrue($validator->isValid($this->invoice));
