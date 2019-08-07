@@ -240,6 +240,26 @@ class Invoice implements XmlSerializable
     }
 
     /**
+     * @return string|array|null
+     */
+    public function getDocumentCurrencyCode()
+    {
+        return $this->documentCurrencyCode;
+    }
+
+    /**
+     * @param string $documentCurrencyCode
+     *
+     * @return Invoice
+     */
+    public function setDocumentCurrencyCode($documentCurrencyCode)
+    {
+        $this->documentCurrencyCode = $documentCurrencyCode;
+
+        return $this;
+    }
+
+    /**
      * @return AdditionalDocumentReference
      */
     public function getAdditionalDocumentReference()
