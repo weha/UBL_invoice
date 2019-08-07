@@ -10,6 +10,7 @@ class Item implements XmlSerializable
     private $description;
     private $name;
     private $sellersItemIdentification;
+    private $taxCategory;
 
     /**
      * @return mixed
@@ -27,6 +28,26 @@ class Item implements XmlSerializable
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTaxCategory()
+    {
+        return $this->taxCategory;
+    }
+
+    /**
+     * @param mixed $taxCategory
+     *
+     * @return Item
+     */
+    public function setTaxCategory($taxCategory)
+    {
+        $this->taxCategory = $taxCategory;
 
         return $this;
     }
@@ -87,5 +108,11 @@ class Item implements XmlSerializable
                 Schema::CBC . 'ID' => $this->sellersItemIdentification,
             ],
         ]);
+
+        if ($this->taxCategory) {
+            $writer->write([
+                Schema::CAC . 'ClassifiedTaxCategory' => $this->taxCategory,
+            ]);
+        }
     }
 }
