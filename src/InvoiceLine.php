@@ -5,11 +5,28 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class InvoiceLine
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class InvoiceLine implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $id;
+    /**
+     * @var
+     */
     private $invoicedQuantity;
+    /**
+     * @var
+     */
     private $lineExtensionAmount;
+    /**
+     * @var string
+     */
     private $unitCode = 'MON';
     /**
      * @var TaxTotal
@@ -173,21 +190,49 @@ class InvoiceLine implements XmlSerializable
      */
     function xmlSerialize(Writer $writer)
     {
+        $lineExtensionAmount           = $this->lineExtensionAmount;
+        $lineExtensionAmountAttributes = [];
+        if (is_array($lineExtensionAmount)) {
+            if (!empty($lineExtensionAmount['attributes'])) {
+                $lineExtensionAmountAttributes = $lineExtensionAmount['attributes'];
+            }
+            if (!empty($lineExtensionAmount['value'])) {
+                $lineExtensionAmount = $lineExtensionAmount['value'];
+            }
+        }
+
+        $invoicedQuantity           = $this->invoicedQuantity;
+        $invoicedQuantityAttributes = [];
+        if (is_array($invoicedQuantity)) {
+            if (!empty($invoicedQuantity['attributes'])) {
+                $invoicedQuantityAttributes = $invoicedQuantity['attributes'];
+            }
+            if (!empty($invoicedQuantity['value'])) {
+                $invoicedQuantity = $invoicedQuantity['value'];
+            }
+        }
+
         $writer->write([
             Schema::CBC . 'ID'       => $this->id,
             [
                 'name'       => Schema::CBC . 'InvoicedQuantity',
-                'value'      => $this->invoicedQuantity,
-                'attributes' => [
-                    'unitCode' => $this->unitCode,
-                ],
+                'value'      => $invoicedQuantity,
+                'attributes' => array_merge(
+                    [
+                        'unitCode' => $this->unitCode,
+                    ],
+                    $invoicedQuantityAttributes
+                ),
             ],
             [
                 'name'       => Schema::CBC . 'LineExtensionAmount',
-                'value'      => number_format($this->lineExtensionAmount, 2, '.', ''),
-                'attributes' => [
-                    'currencyID' => Generator::$currencyID,
-                ],
+                'value'      => number_format($lineExtensionAmount, 2, '.', ''),
+                'attributes' => array_merge(
+                    [
+                        'currencyID' => Generator::$currencyID,
+                    ],
+                    $lineExtensionAmountAttributes
+                ),
             ],
             Schema::CAC . 'TaxTotal' => $this->taxTotal,
             Schema::CAC . 'Item'     => $this->item,
