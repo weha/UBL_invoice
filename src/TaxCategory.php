@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\UBL\Invoice;
 
+use InvalidArgumentException;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -92,21 +93,6 @@ class TaxCategory implements XmlSerializable
         return $this;
     }
 
-    public function validate()
-    {
-        if ($this->id === null) {
-            throw new \InvalidArgumentException('Missing taxcategory id');
-        }
-
-        if ($this->name === null) {
-            throw new \InvalidArgumentException('Missing taxcategory name');
-        }
-
-        if ($this->percent === null) {
-            throw new \InvalidArgumentException('Missing taxcategory percent');
-        }
-    }
-
     /**
      * The xmlSerialize method is called during xml writing.
      *
@@ -126,6 +112,21 @@ class TaxCategory implements XmlSerializable
 
         if ($this->taxScheme != null) {
             $writer->write([Schema::CAC . 'TaxScheme' => $this->taxScheme]);
+        }
+    }
+
+    public function validate()
+    {
+        if ($this->id === null) {
+            throw new InvalidArgumentException('Missing taxcategory id');
+        }
+
+        if ($this->name === null) {
+            throw new InvalidArgumentException('Missing taxcategory name');
+        }
+
+        if ($this->percent === null) {
+            throw new InvalidArgumentException('Missing taxcategory percent');
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\UBL\Invoice;
 
+use InvalidArgumentException;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -53,13 +54,6 @@ class TaxTotal implements XmlSerializable
         return $this;
     }
 
-    public function validate()
-    {
-        if ($this->taxAmount === null) {
-            throw new \InvalidArgumentException('Missing taxtotal taxamount');
-        }
-    }
-
     /**
      * The xmlSerialize method is called during xml writing.
      *
@@ -83,6 +77,13 @@ class TaxTotal implements XmlSerializable
 
         foreach ($this->taxSubTotals as $taxSubTotal) {
             $writer->write([Schema::CAC . 'TaxSubtotal' => $taxSubTotal]);
+        }
+    }
+
+    public function validate()
+    {
+        if ($this->taxAmount === null) {
+            throw new InvalidArgumentException('Missing taxtotal taxamount');
         }
     }
 }
