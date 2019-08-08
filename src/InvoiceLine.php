@@ -179,7 +179,7 @@ class InvoiceLine implements XmlSerializable
             if (!empty($lineExtensionAmount['attributes'])) {
                 $lineExtensionAmountAttributes = $lineExtensionAmount['attributes'];
             }
-            if (is_array($lineExtensionAmount) && !empty($lineExtensionAmount['value'])) {
+            if (!empty($lineExtensionAmount['value'])) {
                 $lineExtensionAmount = $lineExtensionAmount['value'];
             }
         }
