@@ -124,10 +124,7 @@ class Invoice implements XmlSerializable
 
         if (!empty($this->paymentTerms)) {
             $writer->write([
-                Schema::CAC . 'PaymentTerms' => [
-                    Schema::CBC .
-                    "Note" => 'Wij verzoeken je vriendelijk het verschuldigde bedrag van € 20,57 voor 15-08-2019 over te maken naar rekeningnummer NL47 RABO 0307 9960 34 onder vermelding van het factuurnummer 2019-1586. Hartelijk dank!',
-                ],
+                Schema::CAC . 'PaymentTerms' => $this->paymentTerms,
             ]);
         }
     }

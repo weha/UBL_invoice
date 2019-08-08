@@ -26,6 +26,8 @@ class PaymentTerms implements XmlSerializable
     public function setNote($note)
     {
         $this->note = $note;
+
+        return $this;
     }
 
     /**
