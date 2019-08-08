@@ -45,6 +45,10 @@ class Invoice implements XmlSerializable
      */
     private $additionalDocumentReference;
     /**
+     * @var PaymentTerms
+     */
+    private $paymentTerms;
+    /**
      * @var Party
      */
     private $accountingSupplierParty;
@@ -115,6 +119,15 @@ class Invoice implements XmlSerializable
         foreach ($this->invoiceLines as $invoiceLine) {
             $writer->write([
                 Schema::CAC . 'InvoiceLine' => $invoiceLine,
+            ]);
+        }
+
+        if (!empty($this->paymentTerms)) {
+            $writer->write([
+                Schema::CAC . 'PaymentTerms' => [
+                    Schema::CBC .
+                    "Note" => 'Wij verzoeken je vriendelijk het verschuldigde bedrag van € 20,57 voor 15-08-2019 over te maken naar rekeningnummer NL47 RABO 0307 9960 34 onder vermelding van het factuurnummer 2019-1586. Hartelijk dank!',
+                ],
             ]);
         }
     }
@@ -401,4 +414,19 @@ class Invoice implements XmlSerializable
         return $this;
     }
 
+    /**
+     * @return PaymentTerms
+     */
+    public function getPaymentTerms(): PaymentTerms
+    {
+        return $this->paymentTerms;
+    }
+
+    /**
+     * @param PaymentTerms $paymentTerms
+     */
+    public function setPaymentTerms(PaymentTerms $paymentTerms): void
+    {
+        $this->paymentTerms = $paymentTerms;
+    }
 }
