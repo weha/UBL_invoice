@@ -5,11 +5,28 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class Address
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Address implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $streetName;
+    /**
+     * @var
+     */
     private $buildingNumber;
+    /**
+     * @var
+     */
     private $cityName;
+    /**
+     * @var
+     */
     private $postalZone;
     /**
      * @var Country

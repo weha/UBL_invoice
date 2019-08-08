@@ -5,6 +5,11 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class AllowanceCharge
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class AllowanceCharge implements XmlSerializable
 {
     /**

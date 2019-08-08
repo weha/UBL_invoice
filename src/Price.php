@@ -5,10 +5,24 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class Price
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Price implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $priceAmount;
+    /**
+     * @var
+     */
     private $baseQuantity;
+    /**
+     * @var string
+     */
     private $unitCode = 'MON';
 
     /**

@@ -6,11 +6,28 @@ use InvalidArgumentException;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class TaxCategory
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class TaxCategory implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $id;
+    /**
+     * @var
+     */
     private $name;
+    /**
+     * @var
+     */
     private $percent;
+    /**
+     * @var
+     */
     private $taxScheme;
 
     /**
@@ -115,6 +132,9 @@ class TaxCategory implements XmlSerializable
         }
     }
 
+    /**
+     *
+     */
     public function validate()
     {
         if ($this->id === null) {

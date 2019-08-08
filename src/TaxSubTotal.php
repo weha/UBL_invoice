@@ -6,9 +6,20 @@ use InvalidArgumentException;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class TaxSubTotal
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class TaxSubTotal implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $taxableAmount;
+    /**
+     * @var
+     */
     private $taxAmount;
 
     /**
@@ -109,6 +120,9 @@ class TaxSubTotal implements XmlSerializable
         );
     }
 
+    /**
+     *
+     */
     public function validate()
     {
         if ($this->taxableAmount === null) {

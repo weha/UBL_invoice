@@ -5,11 +5,28 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class InvoiceLine
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class InvoiceLine implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $id;
+    /**
+     * @var
+     */
     private $invoicedQuantity;
+    /**
+     * @var
+     */
     private $lineExtensionAmount;
+    /**
+     * @var string
+     */
     private $unitCode = 'MON';
     /**
      * @var TaxTotal

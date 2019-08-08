@@ -5,10 +5,24 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class AdditionalDocumentReference
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class AdditionalDocumentReference implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $id;
+    /**
+     * @var
+     */
     private $attachment;
+    /**
+     * @var
+     */
     private $filename;
 
     /**
@@ -71,6 +85,9 @@ class AdditionalDocumentReference implements XmlSerializable
         return $this;
     }
 
+    /**
+     * @param Writer $writer
+     */
     function xmlSerialize(Writer $writer)
     {
         $writer->write([

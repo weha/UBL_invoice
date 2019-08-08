@@ -5,8 +5,16 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class Party
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Party implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $name;
     /**
      * @var Address
@@ -170,6 +178,9 @@ class Party implements XmlSerializable
         return $this;
     }
 
+    /**
+     * @param Writer $writer
+     */
     function xmlSerialize(Writer $writer)
     {
         $writer->write([

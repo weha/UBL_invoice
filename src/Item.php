@@ -5,11 +5,28 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class Item
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Item implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $description;
+    /**
+     * @var
+     */
     private $name;
+    /**
+     * @var
+     */
     private $sellersItemIdentification;
+    /**
+     * @var
+     */
     private $taxCategory;
 
     /**
