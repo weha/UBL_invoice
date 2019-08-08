@@ -4,10 +4,24 @@ namespace CrixuAMG\UBL\Invoice;
 
 use Sabre\Xml\Service;
 
+/**
+ * Class Generator
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Generator
 {
+    /**
+     * @var
+     */
     public static $currencyID;
 
+    /**
+     * @param Invoice $invoice
+     * @param string  $currencyId
+     *
+     * @return string
+     */
     public static function invoice(Invoice $invoice, $currencyId = 'EUR')
     {
         self::$currencyID = $currencyId;

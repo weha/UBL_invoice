@@ -5,11 +5,29 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class Item
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Item implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $description;
+    /**
+     * @var
+     */
     private $name;
+    /**
+     * @var
+     */
     private $sellersItemIdentification;
+    /**
+     * @var
+     */
+    private $taxCategory;
 
     /**
      * @return mixed
@@ -27,6 +45,26 @@ class Item implements XmlSerializable
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTaxCategory()
+    {
+        return $this->taxCategory;
+    }
+
+    /**
+     * @param mixed $taxCategory
+     *
+     * @return Item
+     */
+    public function setTaxCategory($taxCategory)
+    {
+        $this->taxCategory = $taxCategory;
 
         return $this;
     }
@@ -87,5 +125,11 @@ class Item implements XmlSerializable
                 Schema::CBC . 'ID' => $this->sellersItemIdentification,
             ],
         ]);
+
+        if ($this->taxCategory) {
+            $writer->write([
+                Schema::CAC . 'ClassifiedTaxCategory' => $this->taxCategory,
+            ]);
+        }
     }
 }

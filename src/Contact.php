@@ -5,10 +5,24 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class Contact
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Contact implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $telephone;
+    /**
+     * @var
+     */
     private $telefax;
+    /**
+     * @var
+     */
     private $electronicMail;
 
     /**

@@ -5,8 +5,16 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class Country
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class Country implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $identificationCode;
 
     /**

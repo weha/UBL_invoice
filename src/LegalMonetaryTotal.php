@@ -5,12 +5,32 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class LegalMonetaryTotal
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class LegalMonetaryTotal implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $lineExtensionAmount;
+    /**
+     * @var
+     */
     private $taxExclusiveAmount;
+    /**
+     * @var
+     */
     private $taxInclusiveAmount;
+    /**
+     * @var int
+     */
     private $allowanceTotalAmount = 0;
+    /**
+     * @var
+     */
     private $payableAmount;
 
     /**

@@ -5,8 +5,16 @@ namespace CrixuAMG\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
+/**
+ * Class TaxScheme
+ *
+ * @package CrixuAMG\UBL\Invoice
+ */
 class TaxScheme implements XmlSerializable
 {
+    /**
+     * @var
+     */
     private $id;
 
     /**
@@ -29,6 +37,9 @@ class TaxScheme implements XmlSerializable
         return $this;
     }
 
+    /**
+     * @param Writer $writer
+     */
     function xmlSerialize(Writer $writer)
     {
         $writer->write([

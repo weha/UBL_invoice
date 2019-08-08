@@ -2,6 +2,8 @@
 
 namespace CrixuAMG\UBL\Invoice;
 
+use DateTime;
+use InvalidArgumentException;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -27,7 +29,7 @@ class Invoice implements XmlSerializable
     private $copyIndicator = false;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $issueDate;
     /**
@@ -123,39 +125,39 @@ class Invoice implements XmlSerializable
     function validate()
     {
         if ($this->id === null) {
-            throw new \InvalidArgumentException('Missing invoice id');
+            throw new InvalidArgumentException('Missing invoice id');
         }
 
         if ($this->id === null) {
-            throw new \InvalidArgumentException('Missing invoice id');
+            throw new InvalidArgumentException('Missing invoice id');
         }
 
-        if (!$this->issueDate instanceof \DateTime) {
-            throw new \InvalidArgumentException('Invalid invoice issueDate');
+        if (!$this->issueDate instanceof DateTime) {
+            throw new InvalidArgumentException('Invalid invoice issueDate');
         }
 
         if ($this->invoiceTypeCode === null) {
-            throw new \InvalidArgumentException('Missing invoice invoiceTypeCode');
+            throw new InvalidArgumentException('Missing invoice invoiceTypeCode');
         }
 
         if ($this->documentCurrencyCode === null) {
-            throw new \InvalidArgumentException('Missing invoice cbc:documentCurrencyCode');
+            throw new InvalidArgumentException('Missing invoice cbc:documentCurrencyCode');
         }
 
         if ($this->accountingSupplierParty === null) {
-            throw new \InvalidArgumentException('Missing invoice accountingSupplierParty');
+            throw new InvalidArgumentException('Missing invoice accountingSupplierParty');
         }
 
         if ($this->accountingCustomerParty === null) {
-            throw new \InvalidArgumentException('Missing invoice accountingCustomerParty');
+            throw new InvalidArgumentException('Missing invoice accountingCustomerParty');
         }
 
         if ($this->invoiceLines === null) {
-            throw new \InvalidArgumentException('Missing invoice lines');
+            throw new InvalidArgumentException('Missing invoice lines');
         }
 
         if ($this->legalMonetaryTotal === null) {
-            throw new \InvalidArgumentException('Missing invoice LegalMonetaryTotal');
+            throw new InvalidArgumentException('Missing invoice LegalMonetaryTotal');
         }
     }
 
@@ -200,7 +202,7 @@ class Invoice implements XmlSerializable
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getIssueDate()
     {
@@ -208,7 +210,7 @@ class Invoice implements XmlSerializable
     }
 
     /**
-     * @param \DateTime $issueDate
+     * @param DateTime $issueDate
      *
      * @return Invoice
      */
