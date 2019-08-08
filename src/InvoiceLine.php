@@ -173,21 +173,49 @@ class InvoiceLine implements XmlSerializable
      */
     function xmlSerialize(Writer $writer)
     {
+        $lineExtensionAmount           = $this->lineExtensionAmount;
+        $lineExtensionAmountAttributes = [];
+        if (is_array($lineExtensionAmount)) {
+            if (!empty($lineExtensionAmount['attributes'])) {
+                $lineExtensionAmountAttributes = $lineExtensionAmount['attributes'];
+            }
+            if (is_array($lineExtensionAmount) && !empty($lineExtensionAmount['value'])) {
+                $lineExtensionAmount = $lineExtensionAmount['value'];
+            }
+        }
+
+        $invoicedQuantity           = $this->invoicedQuantity;
+        $invoicedQuantityAttributes = [];
+        if (is_array($invoicedQuantity)) {
+            if (!empty($invoicedQuantity['attributes'])) {
+                $invoicedQuantityAttributes = $invoicedQuantity['attributes'];
+            }
+            if (!empty($invoicedQuantity['value'])) {
+                $invoicedQuantity = $invoicedQuantity['value'];
+            }
+        }
+
         $writer->write([
             Schema::CBC . 'ID'       => $this->id,
             [
                 'name'       => Schema::CBC . 'InvoicedQuantity',
-                'value'      => $this->invoicedQuantity,
-                'attributes' => [
-                    'unitCode' => $this->unitCode,
-                ],
+                'value'      => $invoicedQuantity,
+                'attributes' => array_merge(
+                    [
+                        'unitCode' => $this->unitCode,
+                    ],
+                    $invoicedQuantityAttributes
+                ),
             ],
             [
                 'name'       => Schema::CBC . 'LineExtensionAmount',
-                'value'      => number_format($this->lineExtensionAmount, 2, '.', ''),
-                'attributes' => [
-                    'currencyID' => Generator::$currencyID,
-                ],
+                'value'      => number_format($lineExtensionAmount, 2, '.', ''),
+                'attributes' => array_merge(
+                    [
+                        'currencyID' => Generator::$currencyID,
+                    ],
+                    $lineExtensionAmountAttributes
+                ),
             ],
             Schema::CAC . 'TaxTotal' => $this->taxTotal,
             Schema::CAC . 'Item'     => $this->item,
