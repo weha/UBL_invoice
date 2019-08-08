@@ -2,6 +2,7 @@
 
 namespace CrixuAMG\UBL\Invoice;
 
+use DateTime;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -12,7 +13,7 @@ class PaymentMeans implements XmlSerializable
      */
     private $code;
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $dueDate;
 
@@ -35,7 +36,7 @@ class PaymentMeans implements XmlSerializable
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDueDate()
     {
@@ -43,7 +44,7 @@ class PaymentMeans implements XmlSerializable
     }
 
     /**
-     * @param \DateTime $dueDate
+     * @param DateTime $dueDate
      *
      * @return PaymentMeans
      */

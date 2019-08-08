@@ -450,13 +450,13 @@ class Invoice implements XmlSerializable
     }
 
     /**
-     * @param PaymentMeans $paymentTerms
+     * @param PaymentMeans $paymentMeans
      *
      * @return Invoice
      */
-    public function setPaymentMeans(PaymentMeans $paymentTerms): Invoice
+    public function setPaymentMeans(PaymentMeans $paymentMeans): Invoice
     {
-        $this->paymentTerms = $paymentTerms;
+        $this->paymentMeans = $paymentMeans;
 
         return $this;
     }
