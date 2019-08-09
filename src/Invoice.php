@@ -45,6 +45,14 @@ class Invoice implements XmlSerializable
      */
     private $additionalDocumentReference;
     /**
+     * @var PaymentTerms
+     */
+    private $paymentTerms;
+    /**
+     * @var PaymentMeans
+     */
+    private $paymentMeans;
+    /**
      * @var Party
      */
     private $accountingSupplierParty;
@@ -115,6 +123,18 @@ class Invoice implements XmlSerializable
         foreach ($this->invoiceLines as $invoiceLine) {
             $writer->write([
                 Schema::CAC . 'InvoiceLine' => $invoiceLine,
+            ]);
+        }
+
+        if (!empty($this->paymentTerms)) {
+            $writer->write([
+                Schema::CAC . 'PaymentTerms' => $this->paymentTerms,
+            ]);
+        }
+
+        if (!empty($this->paymentMeans)) {
+            $writer->write([
+                Schema::CAC . 'PaymentMeans' => $this->paymentMeans,
             ]);
         }
     }
@@ -401,4 +421,43 @@ class Invoice implements XmlSerializable
         return $this;
     }
 
+    /**
+     * @return PaymentTerms
+     */
+    public function getPaymentTerms(): PaymentTerms
+    {
+        return $this->paymentTerms;
+    }
+
+    /**
+     * @param PaymentTerms $paymentTerms
+     *
+     * @return Invoice
+     */
+    public function setPaymentTerms(PaymentTerms $paymentTerms): Invoice
+    {
+        $this->paymentTerms = $paymentTerms;
+
+        return $this;
+    }
+
+    /**
+     * @return PaymentMeans
+     */
+    public function getPaymentMeans(): PaymentMeans
+    {
+        return $this->paymentMeans;
+    }
+
+    /**
+     * @param PaymentMeans $paymentMeans
+     *
+     * @return Invoice
+     */
+    public function setPaymentMeans(PaymentMeans $paymentMeans): Invoice
+    {
+        $this->paymentMeans = $paymentMeans;
+
+        return $this;
+    }
 }

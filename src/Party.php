@@ -98,6 +98,8 @@ class Party implements XmlSerializable
     public function setCompanyId($companyId)
     {
         $this->companyId = $companyId;
+
+        return $this;
     }
 
     /**
@@ -116,6 +118,8 @@ class Party implements XmlSerializable
     public function setTaxScheme($taxScheme)
     {
         $this->taxScheme = $taxScheme;
+
+        return $this;
     }
 
     /**
