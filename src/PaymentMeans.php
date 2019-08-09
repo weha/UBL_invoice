@@ -16,6 +16,10 @@ class PaymentMeans implements XmlSerializable
      * @var DateTime
      */
     private $dueDate;
+    /**
+     * @var PayeeFinancialAccount
+     */
+    private $payeeFinancialAccount;
 
     /**
      * @return string
@@ -56,6 +60,26 @@ class PaymentMeans implements XmlSerializable
     }
 
     /**
+     * @return PayeeFinancialAccount
+     */
+    public function getPayeeFinancialAccount()
+    {
+        return $this->payeeFinancialAccount;
+    }
+
+    /**
+     * @param PayeeFinancialAccount $payeeFinancialAccount
+     *
+     * @return PaymentMeans
+     */
+    public function setPayeeFinancialAccount($payeeFinancialAccount)
+    {
+        $this->payeeFinancialAccount = $payeeFinancialAccount;
+
+        return $this;
+    }
+
+    /**
      * @param Writer $writer
      */
     function xmlSerialize(Writer $writer)
@@ -67,6 +91,12 @@ class PaymentMeans implements XmlSerializable
         if (!empty($this->dueDate)) {
             $writer->write([
                 Schema::CBC . 'PaymmentMeansDueDate' => $this->dueDate->format('Y-m-d'),
+            ]);
+        }
+
+        if (!empty($this->payeeFinancialAccount)) {
+            $writer->write([
+                Schema::CAC . 'PayeeFinancialAccount' => $this->payeeFinancialAccount,
             ]);
         }
     }
