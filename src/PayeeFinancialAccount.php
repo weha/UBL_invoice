@@ -10,7 +10,7 @@ use Sabre\Xml\XmlSerializable;
  *
  * @package CrixuAMG\UBL\Invoice
  */
-class PayeeFinancialAccount extends XmlSerializable
+class PayeeFinancialAccount implements XmlSerializable
 {
     /**
      * @var
