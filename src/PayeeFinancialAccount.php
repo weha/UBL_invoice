@@ -3,14 +3,14 @@
 namespace CrixuAMG\UBL\Invoice;
 
 use Sabre\Xml\Writer;
-use TheSeer\Tokenizer\XMLSerializer;
+use Sabre\Xml\XmlSerializable;
 
 /**
  * Class PayeeFinancialAccount
  *
  * @package CrixuAMG\UBL\Invoice
  */
-class PayeeFinancialAccount extends XMLSerializer
+class PayeeFinancialAccount extends XmlSerializable
 {
     /**
      * @var
