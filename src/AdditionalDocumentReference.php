@@ -24,6 +24,10 @@ class AdditionalDocumentReference implements XmlSerializable
      * @var
      */
     private $filename;
+    /**
+     * @var
+     */
+    private $documentType;
 
     /**
      * @return mixed
@@ -86,6 +90,26 @@ class AdditionalDocumentReference implements XmlSerializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getDocumentType()
+    {
+        return $this->documentType;
+    }
+
+    /**
+     * @param $documentType
+     *
+     * @return AdditionalDocumentReference
+     */
+    public function setDocumentType($documentType)
+    {
+        $this->documentType = $documentType;
+
+        return $this;
+    }
+
+    /**
      * @param Writer $writer
      */
     function xmlSerialize(Writer $writer)
@@ -103,5 +127,11 @@ class AdditionalDocumentReference implements XmlSerializable
                 ],
             ],
         ]);
+
+        if (!empty($this->documentType)) {
+            $writer->write([
+                Schema::CBC . 'DocumentType' => $this->documentType,
+            ]);
+        }
     }
 }
