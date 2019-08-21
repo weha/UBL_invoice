@@ -7,7 +7,12 @@
     <cbc:ID>CIT1234</cbc:ID>
     <cbc:CopyIndicator>false</cbc:CopyIndicator>
     <cbc:IssueDate>1994-12-12</cbc:IssueDate>
+    <cbc:DueDate>1994-12-26</cbc:DueDate>
     <cbc:InvoiceTypeCode>SalesInvoice</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <cac:OrderReference>
+        <cbc:ID>12345</cbc:ID>
+    </cac:OrderReference>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyName>
@@ -34,7 +39,9 @@
                 </cac:Address>
             </cac:PhysicalLocation>
             <cac:Contact>
+                <cbc:Name>John</cbc:Name>
                 <cbc:Telephone>31402939003</cbc:Telephone>
+                <cbc:Telefax>31402939001</cbc:Telefax>
                 <cbc:ElectronicMail>info@cleverit.nl</cbc:ElectronicMail>
             </cac:Contact>
         </cac:Party>
@@ -65,7 +72,9 @@
                 </cac:Address>
             </cac:PhysicalLocation>
             <cac:Contact>
+                <cbc:Name>John</cbc:Name>
                 <cbc:Telephone>31402939003</cbc:Telephone>
+                <cbc:Telefax>31402939001</cbc:Telefax>
                 <cbc:ElectronicMail>info@cleverit.nl</cbc:ElectronicMail>
             </cac:Contact>
         </cac:Party>
@@ -141,6 +150,13 @@
             <cac:SellersItemIdentification>
                 <cbc:ID>1ABCD</cbc:ID>
             </cac:SellersItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>21</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
         </cac:Item>
     </cac:InvoiceLine>
 </Invoice>

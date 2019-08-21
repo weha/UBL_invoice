@@ -1,18 +1,9 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: bram.vaneijk
- * Date: 13-10-2016
- * Time: 16:29
- */
-
-namespace CleverIt\UBL\Invoice;
-
+<?php namespace CleverIt\UBL\Invoice;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-class Invoice implements XmlSerializable{
+class Invoice implements XmlSerializable {
     private $UBLVersionID = '2.1';
 
     /**
@@ -29,10 +20,17 @@ class Invoice implements XmlSerializable{
      */
     private $issueDate;
     /**
+     * @var \DateTime
+     */
+    private $dueDate;
+
+    /**
      * @var string
      */
-
     private $invoiceTypeCode;
+
+    /** @var string */
+    private $documentCurrencyCode;
 
     /**
      * @var AdditionalDocumentReference
@@ -64,6 +62,7 @@ class Invoice implements XmlSerializable{
      */
     private $allowanceCharges;
 
+    private $orderReference;
 
     function validate()
     {
@@ -110,10 +109,24 @@ class Invoice implements XmlSerializable{
             Schema::CBC . 'ID' => $this->id,
             Schema::CBC . 'CopyIndicator' => $this->copyIndicator ? 'true' : 'false',
             Schema::CBC . 'IssueDate' => $this->issueDate->format('Y-m-d'),
+            Schema::CBC . 'DueDate' => $this->dueDate->format('Y-m-d'),
             Schema::CBC . 'InvoiceTypeCode' => $this->invoiceTypeCode,
+            Schema::CBC . 'DocumentCurrencyCode' => $this->documentCurrencyCode
+        ]);
+
+        if ($this->orderReference) {
+            $writer->write([
+                Schema::CAC . 'OrderReference' => [
+                    Schema::CBC . 'ID' => $this->orderReference
+                ]
+            ]);
+        }
+
+        $writer->write([
             Schema::CAC . 'AccountingSupplierParty' => [Schema::CAC . "Party" => $this->accountingSupplierParty],
             Schema::CAC . 'AccountingCustomerParty' => [Schema::CAC . "Party" => $this->accountingCustomerParty],
         ]);
+
 
         if($this->additionalDocumentReference!= null){
             $writer->write([
@@ -192,6 +205,21 @@ class Invoice implements XmlSerializable{
      */
     public function setIssueDate($issueDate) {
         $this->issueDate = $issueDate;
+        return $this;
+    }
+    /**
+     * @return \DateTime
+     */
+    public function getDueDate() {
+        return $this->dueDate;
+    }
+
+    /**
+     * @param \DateTime $dueDate
+     * @return Invoice
+     */
+    public function setDueDate($dueDate) {
+        $this->dueDate = $dueDate;
         return $this;
     }
 
@@ -320,6 +348,41 @@ class Invoice implements XmlSerializable{
      */
     public function setAllowanceCharges($allowanceCharges) {
         $this->allowanceCharges = $allowanceCharges;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocumentCurrencyCode(): string
+    {
+        return $this->documentCurrencyCode;
+    }
+
+    /**
+     * @param string $documentCurrencyCode
+     */
+    public function setDocumentCurrencyCode(string $documentCurrencyCode)
+    {
+        $this->documentCurrencyCode = $documentCurrencyCode;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderReference()
+    {
+        return $this->orderReference;
+    }
+
+    /**
+     * @param mixed $orderReference
+     * @return self
+     */
+    public function setOrderReference($orderReference): self
+    {
+        $this->orderReference = $orderReference;
         return $this;
     }
 

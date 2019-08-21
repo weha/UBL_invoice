@@ -2,6 +2,8 @@
 
 namespace CleverIt\UBL\Invoice\Tests;
 
+use CleverIt\UBL\Invoice\ClassifiedTaxCategory;
+use DateInterval;
 use Greenter\Ubl\UblValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -20,9 +22,13 @@ class InvoiceTest extends TestCase
 
         $invoice = new \CleverIt\UBL\Invoice\Invoice();
         $date = \DateTime::createFromFormat('d-m-Y', '12-12-1994');
+        $dueDate = \DateTime::createFromFormat('d-m-Y', '26-12-1994');
         $invoice->setId('CIT1234');
         $invoice->setIssueDate($date);
+        $invoice->setDueDate($dueDate);
         $invoice->setInvoiceTypeCode("SalesInvoice");
+        $invoice->setOrderReference('12345');
+        $invoice->setDocumentCurrencyCode("EUR");
 
         $accountingSupplierParty = new \CleverIt\UBL\Invoice\Party();
         $accountingSupplierParty->setName('CleverIt');
@@ -35,7 +41,13 @@ class InvoiceTest extends TestCase
 
         $accountingSupplierParty->setPostalAddress($supplierAddress);
         $accountingSupplierParty->setPhysicalLocation($supplierAddress);
-        $accountingSupplierParty->setContact((new \CleverIt\UBL\Invoice\Contact())->setElectronicMail("info@cleverit.nl")->setTelephone("31402939003"));
+        $accountingSupplierParty->setContact(
+            (new \CleverIt\UBL\Invoice\Contact())
+                ->setName("John")
+                ->setElectronicMail("info@cleverit.nl")
+                ->setTelephone("31402939003")
+                ->setTelefax("31402939001")
+        );
 
         $invoice->setAccountingSupplierParty($accountingSupplierParty);
         $invoice->setAccountingCustomerParty($accountingSupplierParty);
@@ -61,12 +73,23 @@ class InvoiceTest extends TestCase
                     ->setTaxScheme((new \CleverIt\UBL\Invoice\TaxScheme())
                         ->setId('VAT'))));
 
+
+        $item = (new \CleverIt\UBL\Invoice\Item())
+            ->setName("Test item")
+            ->setDescription("test item description")
+            ->setSellersItemIdentification("1ABCD")
+            ->setClassifiedTaxCategory(
+                (new ClassifiedTaxCategory())
+                    ->setID("S")
+                    ->setPercent(21)
+            );
+
         $invoiceLine = (new \CleverIt\UBL\Invoice\InvoiceLine())
             ->setId(1)
             ->setInvoicedQuantity(1)
             ->setLineExtensionAmount(100)
             ->setTaxTotal($taxtotal)
-            ->setItem((new \CleverIt\UBL\Invoice\Item())->setName("Test item")->setDescription("test item description")->setSellersItemIdentification("1ABCD"));
+            ->setItem($item);
 
         $invoice->setInvoiceLines([$invoiceLine]);
         $invoice->setTaxTotal($taxtotal);
