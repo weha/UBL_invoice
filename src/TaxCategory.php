@@ -89,10 +89,6 @@ class TaxCategory implements XmlSerializable {
             throw new \InvalidArgumentException('Missing taxcategory id');
         }
 
-        if ($this->name === null) {
-            throw new \InvalidArgumentException('Missing taxcategory name');
-        }
-
         if ($this->percent === null) {
             throw new \InvalidArgumentException('Missing taxcategory percent');
         }

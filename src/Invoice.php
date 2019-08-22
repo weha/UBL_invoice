@@ -1,5 +1,6 @@
 <?php namespace CleverIt\UBL\Invoice;
 
+use App\Payment;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
@@ -62,7 +63,14 @@ class Invoice implements XmlSerializable {
      */
     private $allowanceCharges;
 
+    /** @var string */
     private $orderReference;
+
+    /** @var PaymentMeans */
+    private $paymentMeans;
+
+    /** @var string */
+    private $note;
 
     function validate()
     {
@@ -111,6 +119,7 @@ class Invoice implements XmlSerializable {
             Schema::CBC . 'IssueDate' => $this->issueDate->format('Y-m-d'),
             Schema::CBC . 'DueDate' => $this->dueDate->format('Y-m-d'),
             Schema::CBC . 'InvoiceTypeCode' => $this->invoiceTypeCode,
+            Schema::CBC . 'Note' => $this->note,
             Schema::CBC . 'DocumentCurrencyCode' => $this->documentCurrencyCode
         ]);
 
@@ -131,6 +140,12 @@ class Invoice implements XmlSerializable {
         if($this->additionalDocumentReference!= null){
             $writer->write([
                 Schema::CAC . 'AdditionalDocumentReference' => $this->additionalDocumentReference,
+            ]);
+        }
+
+        if($this->paymentMeans!= null){
+            $writer->write([
+                Schema::CAC . 'PaymentMeans' => $this->paymentMeans,
             ]);
         }
 
@@ -386,4 +401,18 @@ class Invoice implements XmlSerializable {
         return $this;
     }
 
+    public function setPaymentMeans($paymentMeans): self
+    {
+        $this->paymentMeans = $paymentMeans;
+        return $this;
+    }
+
+    /**
+     * @param mixed $note
+     */
+    public function setNote($note): self
+    {
+        $this->note = $note;
+        return $this;
+    }
 }

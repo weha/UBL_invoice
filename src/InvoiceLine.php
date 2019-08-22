@@ -186,7 +186,15 @@ class InvoiceLine implements XmlSerializable {
         if ($this->price !== null) {
             $writer->write(
                 [
-                    Schema::CAC . 'Price' => $this->price
+                    Schema::CAC . 'Price' => [
+                        [
+                            'name' => Schema::CBC . 'PriceAmount',
+                            'value' => number_format($this->price, 2, '.', ''),
+                            'attributes' => [
+                                'currencyID' => Generator::$currencyID
+                            ]
+                        ]
+                    ]
                 ]
             );
         }
