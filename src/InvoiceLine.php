@@ -18,6 +18,8 @@ class InvoiceLine implements XmlSerializable {
     private $lineExtensionAmount;
     private $documentReference;
     private $unitCode = 'MON';
+    private $note;
+
     /**
      * @var TaxTotal
      */
@@ -32,13 +34,6 @@ class InvoiceLine implements XmlSerializable {
     private $price;
 
     /**
-     * @return mixed
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-    /**
      * @param mixed $id
      * @return InvoiceLine
      */
@@ -48,26 +43,12 @@ class InvoiceLine implements XmlSerializable {
     }
 
     /**
-     * @return mixed
-     */
-    public function getInvoicedQuantity() {
-        return $this->invoicedQuantity;
-    }
-
-    /**
      * @param mixed $invoicedQuantity
      * @return InvoiceLine
      */
     public function setInvoicedQuantity($invoicedQuantity) {
         $this->invoicedQuantity = $invoicedQuantity;
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLineExtensionAmount() {
-        return $this->lineExtensionAmount;
     }
 
     /**
@@ -160,6 +141,7 @@ class InvoiceLine implements XmlSerializable {
                     'unitCode' => $this->unitCode
                 ]
             ],
+            Schema::CBC.'Note' => $this->note,
             [
                 'name' => Schema::CBC . 'LineExtensionAmount',
                 'value' => number_format($this->lineExtensionAmount, 2, '.', ''),
@@ -176,6 +158,16 @@ class InvoiceLine implements XmlSerializable {
                 ],
             ]);
         }
+
+        $writer->write([
+            Schema::CAC . 'TaxTotal' => [
+                    'name' => Schema::CBC . 'TaxAmount',
+                    'value' => $this->taxTotal,
+                    'attributes' => [
+                        'currencyID' => Generator::$currencyID
+                    ]
+            ]
+        ]);
 
         $writer->write([
             Schema::CAC . 'Item' => $this->item,
@@ -204,6 +196,12 @@ class InvoiceLine implements XmlSerializable {
     {
         $this->documentReference = $documentReference;
 
+        return $this;
+    }
+
+    public function setNote($note): self
+    {
+        $this->note = $note;
         return $this;
     }
 }
