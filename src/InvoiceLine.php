@@ -134,6 +134,7 @@ class InvoiceLine implements XmlSerializable {
     {
         $writer->write([
             Schema::CBC . 'ID' => $this->id,
+            Schema::CBC.'Note' => $this->note,
             [
                 'name' => Schema::CBC . 'InvoicedQuantity',
                 'value' => $this->invoicedQuantity,
@@ -141,7 +142,6 @@ class InvoiceLine implements XmlSerializable {
                     'unitCode' => $this->unitCode
                 ]
             ],
-            Schema::CBC.'Note' => $this->note,
             [
                 'name' => Schema::CBC . 'LineExtensionAmount',
                 'value' => number_format($this->lineExtensionAmount, 2, '.', ''),
@@ -160,13 +160,7 @@ class InvoiceLine implements XmlSerializable {
         }
 
         $writer->write([
-            Schema::CAC . 'TaxTotal' => [
-                    'name' => Schema::CBC . 'TaxAmount',
-                    'value' => $this->taxTotal,
-                    'attributes' => [
-                        'currencyID' => Generator::$currencyID
-                    ]
-            ]
+            Schema::CAC . 'TaxTotal' => $this->taxTotal
         ]);
 
         $writer->write([

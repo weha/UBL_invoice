@@ -16,13 +16,13 @@ class PaymentMeans implements XmlSerializable {
                 'name' => Schema::CBC.'PaymentMeansCode',
                 'value' => $this->code,
             ],
-            Schema::CAC.'PayeeFinancialAccount' => [
+            Schema::CAC.'PayeeFinancialAccount' => [[
                 'name' => Schema::CBC . 'ID',
                 'value' => $this->payeeFinancialAccount,
                 'attributes' => [
                     'schemeID' => 'IBAN'
                 ]
-            ]
+            ]]
         ]);
     }
 
