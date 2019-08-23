@@ -120,6 +120,7 @@ class Invoice implements XmlSerializable {
             Schema::CBC . 'DueDate' => $this->dueDate->format('Y-m-d'),
             Schema::CBC . 'InvoiceTypeCode' => $this->invoiceTypeCode,
             Schema::CBC . 'Note' => $this->note,
+            Schema::CBC . 'TaxPointDate' => $this->issueDate->format('Y-m-d'),
             Schema::CBC . 'DocumentCurrencyCode' => $this->documentCurrencyCode
         ]);
 

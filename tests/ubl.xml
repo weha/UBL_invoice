@@ -9,6 +9,8 @@
     <cbc:IssueDate>1994-12-12</cbc:IssueDate>
     <cbc:DueDate>1994-12-26</cbc:DueDate>
     <cbc:InvoiceTypeCode>SalesInvoice</cbc:InvoiceTypeCode>
+    <cbc:Note/>
+    <cbc:TaxPointDate>1994-12-12</cbc:TaxPointDate>
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
     <cac:OrderReference>
         <cbc:ID>12345</cbc:ID>
