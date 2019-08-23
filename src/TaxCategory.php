@@ -62,7 +62,9 @@ class TaxCategory implements XmlSerializable {
      * @return TaxCategory
      */
     public function setPercent($percent) {
+
         $this->percent = $percent;
+
         return $this;
     }
 
