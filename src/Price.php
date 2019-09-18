@@ -109,7 +109,6 @@ class Price implements XmlSerializable
                     'unitCode' => $this->unitCode,
                 ],
             ],
-
         ]);
     }
 }
