@@ -41,6 +41,8 @@ class Invoice implements XmlSerializable{
 
     private $orderReference;
 
+    private $paymentTerms;
+
     /**
      * @var Party
      */
@@ -139,6 +141,12 @@ class Invoice implements XmlSerializable{
         if ($this->paymentMeans != null) {
             $writer->write([
                 Schema::CAC . 'PaymentMeans' => $this->paymentMeans
+            ]);
+        }
+
+        if ($this->paymentTerms != null) {
+            $writer->write([
+                Schema::CAC . 'PaymentTerms' => $this->paymentTerms
             ]);
         }
 
@@ -254,6 +262,24 @@ class Invoice implements XmlSerializable{
 
     public function setOrderReference($orderReference) {
         $this->orderReference = $orderReference;
+        return $this;
+    }
+
+    /**
+     * @return PaymentTerms
+     */
+    public function getPaymentTerms()
+    {
+        return $this->paymentTerms;
+    }
+
+    /**
+     * @param PaymentTerms $paymentTerms
+     * @return Invoice
+     */
+    public function setPaymentTerms($paymentTerms)
+    {
+        $this->paymentTerms = $paymentTerms;
         return $this;
     }
 
