@@ -39,6 +39,8 @@ class Invoice implements XmlSerializable{
      */
     private $additionalDocumentReference;
 
+    private $orderReference;
+
     /**
      * @var Party
      */
@@ -47,6 +49,9 @@ class Invoice implements XmlSerializable{
      * @var Party
      */
     private $accountingCustomerParty;
+
+    private $paymentMeans;
+
     /**
      * @var TaxTotal
      */
@@ -111,6 +116,16 @@ class Invoice implements XmlSerializable{
             Schema::CBC . 'CopyIndicator' => $this->copyIndicator ? 'true' : 'false',
             Schema::CBC . 'IssueDate' => $this->issueDate->format('Y-m-d'),
             Schema::CBC . 'InvoiceTypeCode' => $this->invoiceTypeCode,
+            
+        ]);
+
+        if($this->orderReference != null){
+            $writer->write([
+                Schema::CAC . 'OrderReference' => $this->orderReference,
+            ]);
+        }
+
+        $writer->write([
             Schema::CAC . 'AccountingSupplierParty' => [Schema::CAC . "Party" => $this->accountingSupplierParty],
             Schema::CAC . 'AccountingCustomerParty' => [Schema::CAC . "Party" => $this->accountingCustomerParty],
         ]);
@@ -118,6 +133,12 @@ class Invoice implements XmlSerializable{
         if($this->additionalDocumentReference!= null){
             $writer->write([
                 Schema::CAC . 'AdditionalDocumentReference' => $this->additionalDocumentReference,
+            ]);
+        }
+
+        if ($this->paymentMeans != null) {
+            $writer->write([
+                Schema::CAC . 'PaymentMeans' => $this->paymentMeans
             ]);
         }
 
@@ -227,6 +248,15 @@ class Invoice implements XmlSerializable{
         return $this;
     }
 
+    public function getOrderReference() {
+        return $this->orderReference;
+    }
+
+    public function setOrderReference($orderReference) {
+        $this->orderReference = $orderReference;
+        return $this;
+    }
+
     /**
      * @return Party
      */
@@ -256,6 +286,24 @@ class Invoice implements XmlSerializable{
      */
     public function setAccountingCustomerParty($accountingCustomerParty) {
         $this->accountingCustomerParty = $accountingCustomerParty;
+        return $this;
+    }
+
+    /**
+     * @return PaymentMeans
+     */
+    public function getPaymentMeans()
+    {
+        return $this->paymentMeans;
+    }
+
+    /**
+     * @param PaymentMeans $paymentMeans
+     * @return Invoice
+     */
+    public function setPaymentMeans(PaymentMeans $paymentMeans)
+    {
+        $this->paymentMeans = $paymentMeans;
         return $this;
     }
 

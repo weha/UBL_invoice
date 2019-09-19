@@ -168,6 +168,12 @@ class Party implements XmlSerializable{
 		    ]);
 	    }
 
+        if($this->legalEntity){
+            $writer->write([
+                Schema::CAC.'PartyLegalEntity' => $this->legalEntity
+            ]);
+        }
+
         if($this->physicalLocation){
             $writer->write([
                Schema::CAC.'PhysicalLocation' => [Schema::CAC.'Address' => $this->physicalLocation]

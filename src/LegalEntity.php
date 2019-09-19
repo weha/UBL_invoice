@@ -42,7 +42,13 @@ class LegalEntity implements XmlSerializable {
 	function xmlSerialize(Writer $writer) {
 		$writer->write([
 			Schema::CBC.'RegistrationName' => $this->registrationName,
-			Schema::CBC.'CompanyID' => $this->companyId
+			[
+	            'name' => Schema::CBC . 'CompanyID',
+	            'value' => $this->companyId,
+	            'attributes' => [
+	                'schemeID' => '0106' // KVK = 0106
+	            ]
+	        ]
 		]);
 	}
 }
