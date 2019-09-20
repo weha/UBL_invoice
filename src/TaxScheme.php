@@ -33,7 +33,15 @@ class TaxScheme implements XmlSerializable {
 
     function xmlSerialize(Writer $writer) {
         $writer->write([
-            Schema::CBC.'ID' => $this->id
+            // Schema::CBC.'ID' => $this->id
+            [
+                'name' => Schema::CBC . 'ID',
+                'value' => $this->id,
+                'attributes' => [
+                    'schemeId' => 'UN/ECE 5153',
+                    'schemeAgencyID' => '6',
+                ]
+            ],
         ]);
     }
 }
