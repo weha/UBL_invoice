@@ -167,7 +167,7 @@ class Party implements XmlSerializable{
                         'name' => Schema::CBC . 'CompanyID',
                         'value' => $this->companyId,
                         'attributes' => [
-                            'schemeId' => 'NL:VAT'
+                            'schemeID' => 'NL:VAT'
                         ]
                     ],
                     Schema::CAC.'TaxScheme' => $this->taxScheme

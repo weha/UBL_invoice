@@ -38,7 +38,7 @@ class TaxScheme implements XmlSerializable {
                 'name' => Schema::CBC . 'ID',
                 'value' => $this->id,
                 'attributes' => [
-                    'schemeId' => 'UN/ECE 5153',
+                    'schemeID' => 'UN/ECE 5153',
                     'schemeAgencyID' => '6',
                 ]
             ],
