@@ -121,6 +121,15 @@ class Invoice implements XmlSerializable{
             
         ]);
 
+        $writer->write([
+            'name' => Schema::CBC . 'DocumentCurrencyCode',
+            'value' => 'EUR',
+            'attributes' => [
+                'listID' => 'ISO 4217 Alpha',
+                'listAgencyID' => '6',
+            ]
+        ]);
+
         if($this->orderReference != null){
             $writer->write([
                 Schema::CAC . 'OrderReference' => $this->orderReference,
