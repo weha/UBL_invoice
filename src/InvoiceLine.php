@@ -1,20 +1,17 @@
 <?php
-
-namespace CrixuAMG\UBL\Invoice;
-
-use Sabre\Xml\Writer;
-use Sabre\Xml\XmlSerializable;
-
 /**
  * Class InvoiceLine
  *
  * @package CrixuAMG\UBL\Invoice
  */
-class InvoiceLine implements XmlSerializable
-{
-    /**
-     * @var
-     */
+
+namespace CleverIt\UBL\Invoice;
+
+
+use Sabre\Xml\Writer;
+use Sabre\Xml\XmlSerializable;
+
+class InvoiceLine implements XmlSerializable {
     private $id;
     /**
      * @var
@@ -24,10 +21,10 @@ class InvoiceLine implements XmlSerializable
      * @var
      */
     private $lineExtensionAmount;
-    /**
-     * @var string
-     */
+    private $documentReference;
     private $unitCode = 'MON';
+    private $note;
+
     /**
      * @var TaxTotal
      */
@@ -42,31 +39,14 @@ class InvoiceLine implements XmlSerializable
     private $price;
 
     /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @param mixed $id
      *
      * @return InvoiceLine
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInvoicedQuantity()
-    {
-        return $this->invoicedQuantity;
     }
 
     /**
@@ -74,19 +54,10 @@ class InvoiceLine implements XmlSerializable
      *
      * @return InvoiceLine
      */
-    public function setInvoicedQuantity($invoicedQuantity)
-    {
+    public function setInvoicedQuantity($invoicedQuantity) {
         $this->invoicedQuantity = $invoicedQuantity;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLineExtensionAmount()
-    {
-        return $this->lineExtensionAmount;
     }
 
     /**
@@ -94,8 +65,7 @@ class InvoiceLine implements XmlSerializable
      *
      * @return InvoiceLine
      */
-    public function setLineExtensionAmount($lineExtensionAmount)
-    {
+    public function setLineExtensionAmount($lineExtensionAmount) {
         $this->lineExtensionAmount = $lineExtensionAmount;
 
         return $this;
@@ -104,8 +74,7 @@ class InvoiceLine implements XmlSerializable
     /**
      * @return TaxTotal
      */
-    public function getTaxTotal()
-    {
+    public function getTaxTotal() {
         return $this->taxTotal;
     }
 
@@ -114,8 +83,7 @@ class InvoiceLine implements XmlSerializable
      *
      * @return InvoiceLine
      */
-    public function setTaxTotal($taxTotal)
-    {
+    public function setTaxTotal($taxTotal) {
         $this->taxTotal = $taxTotal;
 
         return $this;
@@ -124,8 +92,7 @@ class InvoiceLine implements XmlSerializable
     /**
      * @return mixed
      */
-    public function getItem()
-    {
+    public function getItem() {
         return $this->item;
     }
 
@@ -134,8 +101,7 @@ class InvoiceLine implements XmlSerializable
      *
      * @return InvoiceLine
      */
-    public function setItem($item)
-    {
+    public function setItem($item) {
         $this->item = $item;
 
         return $this;
@@ -144,8 +110,7 @@ class InvoiceLine implements XmlSerializable
     /**
      * @return Price
      */
-    public function getPrice()
-    {
+    public function getPrice() {
         return $this->price;
     }
 
@@ -154,8 +119,7 @@ class InvoiceLine implements XmlSerializable
      *
      * @return InvoiceLine
      */
-    public function setPrice($price)
-    {
+    public function setPrice($price) {
         $this->price = $price;
 
         return $this;
@@ -164,8 +128,7 @@ class InvoiceLine implements XmlSerializable
     /**
      * @return mixed
      */
-    public function getUnitCode()
-    {
+    public function getUnitCode() {
         return $this->unitCode;
     }
 
@@ -174,8 +137,7 @@ class InvoiceLine implements XmlSerializable
      *
      * @return InvoiceLine
      */
-    public function setUnitCode($unitCode)
-    {
+    public function setUnitCode($unitCode) {
         $this->unitCode = $unitCode;
 
         return $this;
@@ -213,37 +175,74 @@ class InvoiceLine implements XmlSerializable
         }
 
         $writer->write([
-            Schema::CBC . 'ID'       => $this->id,
+            Schema::CBC . 'ID' => $this->id,
+            Schema::CBC.'Note' => $this->note]);
+
+        if ($this->invoicedQuantity!==null) {
+            $writer->write([
+                [
+                    'name' => Schema::CBC . 'InvoicedQuantity',
+                    'value' => $this->invoicedQuantity,
+                    'attributes' => [
+                        'unitCode' => $this->unitCode
+                    ]
+                ]
+            ]);
+        }
+
+        $writer->write([
             [
-                'name'       => Schema::CBC . 'InvoicedQuantity',
-                'value'      => $invoicedQuantity,
-                'attributes' => array_merge(
-                    [
-                        'unitCode' => $this->unitCode,
-                    ],
-                    $invoicedQuantityAttributes
-                ),
-            ],
-            [
-                'name'       => Schema::CBC . 'LineExtensionAmount',
-                'value'      => number_format($lineExtensionAmount, 2, '.', ''),
-                'attributes' => array_merge(
-                    [
-                        'currencyID' => Generator::$currencyID,
-                    ],
-                    $lineExtensionAmountAttributes
-                ),
-            ],
-            Schema::CAC . 'TaxTotal' => $this->taxTotal,
-            Schema::CAC . 'Item'     => $this->item,
+                'name' => Schema::CBC . 'LineExtensionAmount',
+                'value' => number_format($this->lineExtensionAmount, 2, '.', ''),
+                'attributes' => [
+                    'currencyID' => Generator::$currencyID
+                ]
+            ]
+        ]);
+
+        if ($this->documentReference) {
+            $writer->write([
+                Schema::CAC . 'DocumentReference' => [
+                    Schema::CBC . 'ID' => $this->documentReference
+                ],
+            ]);
+        }
+
+        $writer->write([
+            Schema::CAC . 'TaxTotal' => $this->taxTotal
+        ]);
+
+        $writer->write([
+            Schema::CAC . 'Item' => $this->item,
         ]);
 
         if ($this->price !== null) {
             $writer->write(
                 [
-                    Schema::CAC . 'Price' => $this->price,
+                    Schema::CAC . 'Price' => [
+                        [
+                            'name' => Schema::CBC . 'PriceAmount',
+                            'value' => number_format($this->price, 2, '.', ''),
+                            'attributes' => [
+                                'currencyID' => Generator::$currencyID
+                            ]
+                        ]
+                    ]
                 ]
             );
         }
+    }
+
+    public function setDocumentReference($documentReference): self
+    {
+        $this->documentReference = $documentReference;
+
+        return $this;
+    }
+
+    public function setNote($note): self
+    {
+        $this->note = $note;
+        return $this;
     }
 }

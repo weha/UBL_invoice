@@ -6,16 +6,7 @@ use InvalidArgumentException;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-/**
- * Class TaxCategory
- *
- * @package CrixuAMG\UBL\Invoice
- */
-class TaxCategory implements XmlSerializable
-{
-    /**
-     * @var
-     */
+class TaxCategory implements XmlSerializable {
     private $id;
     /**
      * @var
@@ -33,8 +24,7 @@ class TaxCategory implements XmlSerializable
     /**
      * @return mixed
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -43,8 +33,7 @@ class TaxCategory implements XmlSerializable
      *
      * @return TaxCategory
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
 
         return $this;
@@ -53,8 +42,7 @@ class TaxCategory implements XmlSerializable
     /**
      * @return mixed
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -63,8 +51,7 @@ class TaxCategory implements XmlSerializable
      *
      * @return TaxCategory
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -73,8 +60,7 @@ class TaxCategory implements XmlSerializable
     /**
      * @return mixed
      */
-    public function getPercent()
-    {
+    public function getPercent() {
         return $this->percent;
     }
 
@@ -83,8 +69,8 @@ class TaxCategory implements XmlSerializable
      *
      * @return TaxCategory
      */
-    public function setPercent($percent)
-    {
+    public function setPercent($percent) {
+
         $this->percent = $percent;
 
         return $this;
@@ -93,8 +79,7 @@ class TaxCategory implements XmlSerializable
     /**
      * @return mixed
      */
-    public function getTaxScheme()
-    {
+    public function getTaxScheme() {
         return $this->taxScheme;
     }
 
@@ -103,11 +88,21 @@ class TaxCategory implements XmlSerializable
      *
      * @return TaxCategory
      */
-    public function setTaxScheme($taxScheme)
-    {
+    public function setTaxScheme($taxScheme) {
         $this->taxScheme = $taxScheme;
-
         return $this;
+    }
+
+
+
+    public function validate() {
+        if ($this->id === null) {
+            throw new \InvalidArgumentException('Missing taxcategory id');
+        }
+
+        if ($this->percent === null) {
+            throw new \InvalidArgumentException('Missing taxcategory percent');
+        }
     }
 
     /**
@@ -117,36 +112,17 @@ class TaxCategory implements XmlSerializable
      *
      * @return void
      */
-    function xmlSerialize(Writer $writer)
-    {
+    function xmlSerialize(Writer $writer) {
         $this->validate();
 
         $writer->write([
-            Schema::CBC . 'ID'      => $this->id,
-            Schema::CBC . 'Name'    => $this->name,
-            Schema::CBC . 'Percent' => $this->percent,
+            Schema::CBC.'ID' => $this->id,
+            Schema::CBC.'Name' => $this->name,
+            Schema::CBC.'Percent' => $this->percent,
         ]);
 
-        if ($this->taxScheme != null) {
-            $writer->write([Schema::CAC . 'TaxScheme' => $this->taxScheme]);
-        }
-    }
-
-    /**
-     *
-     */
-    public function validate()
-    {
-        if ($this->id === null) {
-            throw new InvalidArgumentException('Missing taxcategory id');
-        }
-
-        if ($this->name === null) {
-            throw new InvalidArgumentException('Missing taxcategory name');
-        }
-
-        if ($this->percent === null) {
-            throw new InvalidArgumentException('Missing taxcategory percent');
+        if($this->taxScheme != null){
+            $writer->write([Schema::CAC.'TaxScheme' => $this->taxScheme]);
         }
     }
 }

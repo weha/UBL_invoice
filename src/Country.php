@@ -10,8 +10,7 @@ use Sabre\Xml\XmlSerializable;
  *
  * @package CrixuAMG\UBL\Invoice
  */
-class Country implements XmlSerializable
-{
+class Country implements XmlSerializable {
     /**
      * @var
      */
@@ -20,20 +19,16 @@ class Country implements XmlSerializable
     /**
      * @return mixed
      */
-    public function getIdentificationCode()
-    {
+    public function getIdentificationCode() {
         return $this->identificationCode;
     }
 
     /**
      * @param mixed $identificationCode
-     *
      * @return Country
      */
-    public function setIdentificationCode($identificationCode)
-    {
+    public function setIdentificationCode($identificationCode) {
         $this->identificationCode = $identificationCode;
-
         return $this;
     }
 
@@ -41,13 +36,11 @@ class Country implements XmlSerializable
      * The xmlSerialize method is called during xml writing.
      *
      * @param Writer $writer
-     *
      * @return void
      */
-    function xmlSerialize(Writer $writer)
-    {
+    function xmlSerialize(Writer $writer) {
         $writer->write([
-            Schema::CBC . 'IdentificationCode' => $this->identificationCode,
+            Schema::CBC.'IdentificationCode' => $this->identificationCode,
         ]);
     }
 

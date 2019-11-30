@@ -2,6 +2,8 @@
 
 namespace CrixuAMG\UBL\Invoice\Tests;
 
+use CleverIt\UBL\Invoice\ClassifiedTaxCategory;
+use DateInterval;
 use Greenter\Ubl\UblValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -9,21 +11,24 @@ class InvoiceTest extends TestCase
 {
     private $invoice;
 
-    public function setUp()
-    {
+    public function setUp(){
         $xmlService = new \Sabre\Xml\Service();
 
         $xmlService->namespaceMap = [
-            'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2'                   => '',
-            'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'     => 'cbc',
-            'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2' => 'cac',
+            'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2' => '',
+            'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2' => 'cbc',
+            'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2' => 'cac'
         ];
 
-        $invoice = new \CrixuAMG\UBL\Invoice\Invoice();
-        $date    = \DateTime::createFromFormat('d-m-Y', '12-12-1994');
+        $invoice = new \CleverIt\UBL\Invoice\Invoice();
+        $date = \DateTime::createFromFormat('d-m-Y', '12-12-1994');
+        $dueDate = \DateTime::createFromFormat('d-m-Y', '26-12-1994');
         $invoice->setId('CIT1234');
         $invoice->setIssueDate($date);
+        $invoice->setDueDate($dueDate);
         $invoice->setInvoiceTypeCode("SalesInvoice");
+        $invoice->setOrderReference('12345');
+        $invoice->setDocumentCurrencyCode("EUR");
 
         $accountingSupplierParty = new \CrixuAMG\UBL\Invoice\Party();
         $accountingSupplierParty->setName('CrixuAMG');
@@ -36,7 +41,13 @@ class InvoiceTest extends TestCase
 
         $accountingSupplierParty->setPostalAddress($supplierAddress);
         $accountingSupplierParty->setPhysicalLocation($supplierAddress);
-        $accountingSupplierParty->setContact((new \CrixuAMG\UBL\Invoice\Contact())->setElectronicMail("info@cleverit.nl")->setTelephone("31402939003"));
+        $accountingSupplierParty->setContact(
+            (new \CleverIt\UBL\Invoice\Contact())
+                ->setName("John")
+                ->setElectronicMail("info@cleverit.nl")
+                ->setTelephone("31402939003")
+                ->setTelefax("31402939001")
+        );
 
         $invoice->setAccountingSupplierParty($accountingSupplierParty);
         $invoice->setAccountingCustomerParty($accountingSupplierParty);
@@ -62,12 +73,23 @@ class InvoiceTest extends TestCase
                     ->setTaxScheme((new \CrixuAMG\UBL\Invoice\TaxScheme())
                         ->setId('VAT'))));
 
-        $invoiceLine = (new \CrixuAMG\UBL\Invoice\InvoiceLine())
+
+        $item = (new \CleverIt\UBL\Invoice\Item())
+            ->setName("Test item")
+            ->setDescription("test item description")
+            ->setSellersItemIdentification("1ABCD")
+            ->setTaxCategory(
+                (new TaxCategory())
+                    ->setID("S")
+                    ->setPercent(21)
+            );
+
+        $invoiceLine = (new \CleverIt\UBL\Invoice\InvoiceLine())
             ->setId(1)
             ->setInvoicedQuantity(1)
             ->setLineExtensionAmount(100)
             ->setTaxTotal($taxtotal)
-            ->setItem((new \CrixuAMG\UBL\Invoice\Item())->setName("Test item")->setDescription("test item description")->setSellersItemIdentification("1ABCD"));
+            ->setItem($item);
 
         $invoice->setInvoiceLines([$invoiceLine]);
         $invoice->setTaxTotal($taxtotal);
@@ -86,8 +108,7 @@ class InvoiceTest extends TestCase
         $this->assertXmlStringEqualsXmlFile(__DIR__ . "/ubl.xml", $this->invoice);
     }
 
-    public function testValidateSchema()
-    {
+    public function testValidateSchema(){
         $validator = new UblValidator();
         $validator->isValid($this->invoice);
         $this->assertTrue($validator->isValid($this->invoice));

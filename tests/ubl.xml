@@ -1,13 +1,18 @@
 <?xml version="1.0"?>
-<Invoice xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-         xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
     <cbc:CustomizationID>OIOUBL-2.01</cbc:CustomizationID>
     <cbc:ID>CIT1234</cbc:ID>
     <cbc:CopyIndicator>false</cbc:CopyIndicator>
     <cbc:IssueDate>1994-12-12</cbc:IssueDate>
+    <cbc:DueDate>1994-12-26</cbc:DueDate>
     <cbc:InvoiceTypeCode>SalesInvoice</cbc:InvoiceTypeCode>
+    <cbc:Note/>
+    <cbc:TaxPointDate>1994-12-12</cbc:TaxPointDate>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <cac:OrderReference>
+        <cbc:ID>12345</cbc:ID>
+    </cac:OrderReference>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyName>
@@ -34,7 +39,9 @@
                 </cac:Address>
             </cac:PhysicalLocation>
             <cac:Contact>
+                <cbc:Name>John</cbc:Name>
                 <cbc:Telephone>31402939003</cbc:Telephone>
+                <cbc:Telefax>31402939001</cbc:Telefax>
                 <cbc:ElectronicMail>info@cleverit.nl</cbc:ElectronicMail>
             </cac:Contact>
         </cac:Party>
@@ -65,7 +72,9 @@
                 </cac:Address>
             </cac:PhysicalLocation>
             <cac:Contact>
+                <cbc:Name>John</cbc:Name>
                 <cbc:Telephone>31402939003</cbc:Telephone>
+                <cbc:Telefax>31402939001</cbc:Telefax>
                 <cbc:ElectronicMail>info@cleverit.nl</cbc:ElectronicMail>
             </cac:Contact>
         </cac:Party>
@@ -106,6 +115,7 @@
     </cac:LegalMonetaryTotal>
     <cac:InvoiceLine>
         <cbc:ID>1</cbc:ID>
+        <cbc:Note/>
         <cbc:InvoicedQuantity unitCode="MON">1</cbc:InvoicedQuantity>
         <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
         <cac:TaxTotal>
@@ -141,6 +151,13 @@
             <cac:SellersItemIdentification>
                 <cbc:ID>1ABCD</cbc:ID>
             </cac:SellersItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>21</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
         </cac:Item>
     </cac:InvoiceLine>
 </Invoice>
