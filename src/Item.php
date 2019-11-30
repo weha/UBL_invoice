@@ -1,20 +1,17 @@
 <?php
-
-namespace CrixuAMG\UBL\Invoice;
-
-use Sabre\Xml\Writer;
-use Sabre\Xml\XmlSerializable;
-
 /**
  * Class Item
  *
  * @package CrixuAMG\UBL\Invoice
  */
-class Item implements XmlSerializable
-{
-    /**
-     * @var
-     */
+
+namespace CleverIt\UBL\Invoice;
+
+
+use Sabre\Xml\Writer;
+use Sabre\Xml\XmlSerializable;
+
+class Item implements XmlSerializable {
     private $description;
     /**
      * @var
@@ -106,6 +103,13 @@ class Item implements XmlSerializable
     {
         $this->sellersItemIdentification = $sellersItemIdentification;
 
+        return $this;
+    }
+
+
+    public function setClassifiedTaxCategory($classifiedTaxCategory)
+    {
+        $this->classifiedTaxCategory = $classifiedTaxCategory;
         return $this;
     }
 
