@@ -25,23 +25,20 @@ class PayeeFinancialAccount implements XmlSerializable
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
     public function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
 
-    /**
-     * @param Writer $writer
-     */
     function xmlSerialize(Writer $writer)
     {
         $writer->write([
-            Schema::CBC . 'ID' => $this->id,
+            'name' => Schema::CBC . 'ID',
+            'value' => $this->id,
+            'attributes' => [
+                'schemeID' => 'IBAN'
+            ]
         ]);
     }
 }

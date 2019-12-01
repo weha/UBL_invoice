@@ -97,11 +97,24 @@ class Party implements XmlSerializable
 	    if($this->taxScheme){
 		    $writer->write([
 			    Schema::CAC.'PartyTaxScheme' => [
-				    Schema::CBC.'CompanyID' => $this->companyId,
+				    // Schema::CBC.'CompanyID' => $this->companyId,
+                    [
+                        'name' => Schema::CBC . 'CompanyID',
+                        'value' => $this->companyId,
+                        'attributes' => [
+                            'schemeID' => 'NL:VAT'
+                        ]
+                    ],
                     Schema::CAC.'TaxScheme' => $this->taxScheme
 			    ],
 		    ]);
 	    }
+
+        if($this->legalEntity){
+            $writer->write([
+                Schema::CAC.'PartyLegalEntity' => $this->legalEntity
+            ]);
+        }
 
         if($this->physicalLocation){
             $writer->write([

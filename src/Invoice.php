@@ -49,6 +49,7 @@ class Invoice implements XmlSerializable {
      * @var AdditionalDocumentReference
      */
     private $additionalDocumentReference;
+    private $orderReference;
     /**
      * @var PaymentTerms
      */
@@ -65,6 +66,9 @@ class Invoice implements XmlSerializable {
      * @var Party
      */
     private $accountingCustomerParty;
+
+    private $paymentMeans;
+
     /**
      * @var TaxTotal
      */
@@ -162,9 +166,15 @@ class Invoice implements XmlSerializable {
             ]);
         }
 
-        if($this->paymentMeans!= null){
+        if ($this->paymentMeans != null) {
             $writer->write([
-                Schema::CAC . 'PaymentMeans' => $this->paymentMeans,
+                Schema::CAC . 'PaymentMeans' => $this->paymentMeans
+            ]);
+        }
+
+        if ($this->paymentTerms != null) {
+            $writer->write([
+                Schema::CAC . 'PaymentTerms' => $this->paymentTerms
             ]);
         }
 
@@ -332,6 +342,33 @@ class Invoice implements XmlSerializable {
         return $this;
     }
 
+    public function getOrderReference() {
+        return $this->orderReference;
+    }
+
+    public function setOrderReference($orderReference) {
+        $this->orderReference = $orderReference;
+        return $this;
+    }
+
+    /**
+     * @return PaymentTerms
+     */
+    public function getPaymentTerms()
+    {
+        return $this->paymentTerms;
+    }
+
+    /**
+     * @param PaymentTerms $paymentTerms
+     * @return Invoice
+     */
+    public function setPaymentTerms($paymentTerms)
+    {
+        $this->paymentTerms = $paymentTerms;
+        return $this;
+    }
+
     /**
      * @return Party
      */
@@ -365,6 +402,24 @@ class Invoice implements XmlSerializable {
     public function setAccountingCustomerParty($accountingCustomerParty) {
         $this->accountingCustomerParty = $accountingCustomerParty;
 
+        return $this;
+    }
+
+    /**
+     * @return PaymentMeans
+     */
+    public function getPaymentMeans()
+    {
+        return $this->paymentMeans;
+    }
+
+    /**
+     * @param PaymentMeans $paymentMeans
+     * @return Invoice
+     */
+    public function setPaymentMeans(PaymentMeans $paymentMeans)
+    {
+        $this->paymentMeans = $paymentMeans;
         return $this;
     }
 
