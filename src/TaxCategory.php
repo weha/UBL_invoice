@@ -1,6 +1,6 @@
 <?php
 
-namespace CrixuAMG\UBL\Invoice;
+namespace weha\UBL\Invoice;
 
 use InvalidArgumentException;
 use Sabre\Xml\Writer;

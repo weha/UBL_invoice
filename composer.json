@@ -1,5 +1,5 @@
 {
-    "name": "crixuamg/ubl_invoice",
+    "name": "weha/ubl_invoice",
     "description": "A PHP wrapper for UBL invoices",
     "keywords": [
         "ubl",
@@ -11,11 +11,11 @@
         "xml",
         "xml invoice"
     ],
-    "homepage": "https://github.com/CrixuAMG/UBL_invoice",
+    "homepage": "https://github.com/weha/UBL_invoice",
     "license": "MIT",
     "authors": [
         {
-            "name": "CrixuAMG",
+            "name": "WEHA",
             "role": "Developer"
         }
     ],
@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CrixuAMG\\UBL\\Invoice\\": [
+            "weha\\UBL\\Invoice\\": [
                 "src/"
             ]
         }
@@ -35,7 +35,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CrixuAMG\\UBL\\Invoice\\Tests\\": "tests/"
+            "weha\\UBL\\Invoice\\Tests\\": "tests/"
         }
     }
 }

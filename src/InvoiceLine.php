@@ -2,10 +2,10 @@
 /**
  * Class InvoiceLine
  *
- * @package CrixuAMG\UBL\Invoice
+ * @package weha\UBL\Invoice
  */
 
-namespace CleverIt\UBL\Invoice;
+namespace weha\UBL\Invoice;
 
 
 use Sabre\Xml\Writer;

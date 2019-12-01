@@ -1,11 +1,11 @@
 <?php
 
-namespace CrixuAMG\UBL\Invoice;
+namespace weha\UBL\Invoice;
 
 /**
  * Class Schema
  *
- * @package CrixuAMG\UBL\Invoice
+ * @package weha\UBL\Invoice
  */
 class Schema
 {

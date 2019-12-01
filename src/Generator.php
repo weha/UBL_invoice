@@ -1,13 +1,13 @@
 <?php
 
-namespace CrixuAMG\UBL\Invoice;
+namespace weha\UBL\Invoice;
 
 use Sabre\Xml\Service;
 
 /**
  * Class Generator
  *
- * @package CrixuAMG\UBL\Invoice
+ * @package weha\UBL\Invoice
  */
 class Generator
 {

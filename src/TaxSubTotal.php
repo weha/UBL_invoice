@@ -1,6 +1,6 @@
 <?php
 
-namespace CrixuAMG\UBL\Invoice;
+namespace weha\UBL\Invoice;
 
 use InvalidArgumentException;
 use Sabre\Xml\Writer;
@@ -9,7 +9,7 @@ use Sabre\Xml\XmlSerializable;
 /**
  * Class TaxSubTotal
  *
- * @package CrixuAMG\UBL\Invoice
+ * @package weha\UBL\Invoice
  */
 class TaxSubTotal implements XmlSerializable
 {

@@ -4,19 +4,19 @@
  * http://www.oioubl.net/validator/
  */
 
-use CrixuAMG\UBL\Invoice\Invoice;
-use CrixuAMG\UBL\Invoice\Generator;
-use CrixuAMG\UBL\Invoice\LegalMonetaryTotal;
-use CrixuAMG\UBL\Invoice\TaxSubTotal;
-use CrixuAMG\UBL\Invoice\Address;
-use CrixuAMG\UBL\Invoice\Country;
-use CrixuAMG\UBL\Invoice\Party;
-use CrixuAMG\UBL\Invoice\Item;
-use CrixuAMG\UBL\Invoice\Price;
-use CrixuAMG\UBL\Invoice\InvoiceLine;
-use CrixuAMG\UBL\Invoice\TaxScheme;
-use CrixuAMG\UBL\Invoice\TaxTotal;
-use CrixuAMG\UBL\Invoice\TaxCategory;
+use weha\UBL\Invoice\Invoice;
+use weha\UBL\Invoice\Generator;
+use weha\UBL\Invoice\LegalMonetaryTotal;
+use weha\UBL\Invoice\TaxSubTotal;
+use weha\UBL\Invoice\Address;
+use weha\UBL\Invoice\Country;
+use weha\UBL\Invoice\Party;
+use weha\UBL\Invoice\Item;
+use weha\UBL\Invoice\Price;
+use weha\UBL\Invoice\InvoiceLine;
+use weha\UBL\Invoice\TaxScheme;
+use weha\UBL\Invoice\TaxTotal;
+use weha\UBL\Invoice\TaxCategory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

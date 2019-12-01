@@ -1,6 +1,6 @@
 <?php
 
-namespace CleverIt\UBL\Invoice;
+namespace weha\UBL\Invoice;
 
 
 use Sabre\Xml\Writer;

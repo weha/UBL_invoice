@@ -1,6 +1,6 @@
 <?php
 
-namespace CrixuAMG\UBL\Invoice;
+namespace weha\UBL\Invoice;
 
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
@@ -8,7 +8,7 @@ use Sabre\Xml\XmlSerializable;
 /**
  * Class Contact
  *
- * @package CrixuAMG\UBL\Invoice
+ * @package weha\UBL\Invoice
  */
 class Contact implements XmlSerializable {
 	private $name;
