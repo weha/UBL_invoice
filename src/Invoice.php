@@ -29,7 +29,7 @@ class Invoice implements XmlSerializable {
     private $copyIndicator = false;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     private $issueDate;
     /**
@@ -49,7 +49,6 @@ class Invoice implements XmlSerializable {
      * @var AdditionalDocumentReference
      */
     private $additionalDocumentReference;
-    private $orderReference;
     /**
      * @var PaymentTerms
      */
@@ -66,8 +65,6 @@ class Invoice implements XmlSerializable {
      * @var Party
      */
     private $accountingCustomerParty;
-
-    private $paymentMeans;
 
     /**
      * @var TaxTotal
@@ -89,9 +86,6 @@ class Invoice implements XmlSerializable {
     /** @var string */
     private $orderReference;
 
-    /** @var PaymentMeans */
-    private $paymentMeans;
-
     /** @var string */
     private $note;
 
@@ -107,6 +101,10 @@ class Invoice implements XmlSerializable {
 
         if (!$this->issueDate instanceof \DateTime) {
             throw new \InvalidArgumentException('Invalid invoice issueDate');
+        }
+
+        if (!$this->dueDate instanceof \DateTime) {
+            throw new \InvalidArgumentException('Invalid invoice dueDate');
         }
 
         if ($this->invoiceTypeCode === null) {
@@ -305,26 +303,6 @@ class Invoice implements XmlSerializable {
     }
 
     /**
-     * @return string|array|null
-     */
-    public function getDocumentCurrencyCode()
-    {
-        return $this->documentCurrencyCode;
-    }
-
-    /**
-     * @param string $documentCurrencyCode
-     *
-     * @return Invoice
-     */
-    public function setDocumentCurrencyCode($documentCurrencyCode)
-    {
-        $this->documentCurrencyCode = $documentCurrencyCode;
-
-        return $this;
-    }
-
-    /**
      * @return AdditionalDocumentReference
      */
     public function getAdditionalDocumentReference() {
@@ -339,33 +317,6 @@ class Invoice implements XmlSerializable {
     public function setAdditionalDocumentReference($additionalDocumentReference) {
         $this->additionalDocumentReference = $additionalDocumentReference;
 
-        return $this;
-    }
-
-    public function getOrderReference() {
-        return $this->orderReference;
-    }
-
-    public function setOrderReference($orderReference) {
-        $this->orderReference = $orderReference;
-        return $this;
-    }
-
-    /**
-     * @return PaymentTerms
-     */
-    public function getPaymentTerms()
-    {
-        return $this->paymentTerms;
-    }
-
-    /**
-     * @param PaymentTerms $paymentTerms
-     * @return Invoice
-     */
-    public function setPaymentTerms($paymentTerms)
-    {
-        $this->paymentTerms = $paymentTerms;
         return $this;
     }
 
@@ -411,16 +362,6 @@ class Invoice implements XmlSerializable {
     public function getPaymentMeans()
     {
         return $this->paymentMeans;
-    }
-
-    /**
-     * @param PaymentMeans $paymentMeans
-     * @return Invoice
-     */
-    public function setPaymentMeans(PaymentMeans $paymentMeans)
-    {
-        $this->paymentMeans = $paymentMeans;
-        return $this;
     }
 
     /**

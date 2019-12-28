@@ -56,9 +56,6 @@ class Party implements XmlSerializable
         return $this;
     }
 
-        return $this;
-    }
-
 	public function setCompanyId($companyId) {
     	$this->companyId = $companyId;
         return $this;
