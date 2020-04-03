@@ -6,42 +6,42 @@ use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
 /**
- * Class Party
- *
- * @package weha\UBL\Invoice
- */
+* Class Party
+*
+* @package weha\UBL\Invoice
+*/
 class Party implements XmlSerializable
 {
     /**
-     * @var
-     */
+    * @var
+    */
     private $name;
     /**
-     * @var Address
-     */
+    * @var Address
+    */
     private $postalAddress;
     /**
-     * @var Address
-     */
+    * @var Address
+    */
     private $physicalLocation;
     /**
-     * @var Contact
-     */
+    * @var Contact
+    */
     private $contact;
 
-	/**
-	 * @var string
-	 */
+    /**
+    * @var string
+    */
     private $companyId;
 
-	/**
-	 * @var TaxScheme
-	 */
+    /**
+    * @var TaxScheme
+    */
     private $taxScheme;
 
-	/**
-	 * @var LegalEntity
-	 */
+    /**
+    * @var LegalEntity
+    */
     private $legalEntity;
 
     public function setName($name) {
@@ -56,19 +56,19 @@ class Party implements XmlSerializable
         return $this;
     }
 
-	public function setCompanyId($companyId) {
-    	$this->companyId = $companyId;
+    public function setCompanyId($companyId) {
+        $this->companyId = $companyId;
         return $this;
-	}
+    }
 
     public function setTaxScheme($taxScheme) {
-    	$this->taxScheme = $taxScheme;
-    	return $this;
+        $this->taxScheme = $taxScheme;
+        return $this;
     }
 
     public function setLegalEntity($legalEntity) {
-    	$this->legalEntity = $legalEntity;
-    	return $this;
+        $this->legalEntity = $legalEntity;
+        return $this;
     }
 
     public function setPhysicalLocation($physicalLocation) {
@@ -91,21 +91,21 @@ class Party implements XmlSerializable
             Schema::CAC.'PostalAddress' => $this->postalAddress
         ]);
 
-	    if($this->taxScheme){
-		    $writer->write([
-			    Schema::CAC.'PartyTaxScheme' => [
-				    // Schema::CBC.'CompanyID' => $this->companyId,
+        if($this->taxScheme){
+            $writer->write([
+                Schema::CAC.'PartyTaxScheme' => [
+                    // Schema::CBC.'CompanyID' => $this->companyId,
                     [
                         'name' => Schema::CBC . 'CompanyID',
                         'value' => $this->companyId,
                         'attributes' => [
-                            'schemeID' => 'NL:VAT'
+                            'schemeID' => substr($this->companyId,0,2).'VAT'
                         ]
                     ],
                     Schema::CAC.'TaxScheme' => $this->taxScheme
-			    ],
-		    ]);
-	    }
+                ],
+            ]);
+        }
 
         if($this->legalEntity){
             $writer->write([
@@ -115,7 +115,7 @@ class Party implements XmlSerializable
 
         if($this->physicalLocation){
             $writer->write([
-               Schema::CAC.'PhysicalLocation' => [Schema::CAC.'Address' => $this->physicalLocation]
+                Schema::CAC.'PhysicalLocation' => [Schema::CAC.'Address' => $this->physicalLocation]
             ]);
         }
 
